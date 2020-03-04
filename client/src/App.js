@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Route, Switch } from 'react-router-dom';
+import Layout from './hoc/Layout';
+import Presentation from './components/Presentation';
+import TestUsers from './components/TestUsers';
 import './App.css';
 
 class App extends Component {
-  componentDidMount() {
-    window.fetch('users')
-      .then(response => response.json())
-      .then(json => console.log(json))
-      .catch(error => console.log(error))
-  }
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+
+        <Layout>
+          {/* with exact the order doesn't matter, w/o exact it does */}
+          {/* Switch + order is alternative to exact */}
+          <Switch>
+            {/*<Route path="/checkout" component={Checkout}></Route>*/}
+            <Route path="/users" component={TestUsers}></Route>
+            <Route path="/" component={Presentation}></Route>
+          </Switch>
+        </Layout>
+
       </div>
     );
   }
