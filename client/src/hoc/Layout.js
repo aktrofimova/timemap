@@ -7,7 +7,7 @@ class Layout extends Component {
     return (
       <Aux>
         <AppBarTM />
-        <main>
+        <main style={{marginTop: "94px"}}>
           {this.props.children}
         </main>
       </Aux>
