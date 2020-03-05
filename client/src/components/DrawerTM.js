@@ -15,69 +15,6 @@ import StyleIcon from '@material-ui/icons/Style';
 import FilterDramaIcon from '@material-ui/icons/FilterDrama';
 import StopIcon from '@material-ui/icons/Stop';
 
-const DrawerTM = () => {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
-  const chapters = [
-    {txt: "Intro", icon: <PlayArrowIcon />},
-    {txt: "Back End", icon: <StorageIcon />},
-    {txt: "Front End", icon: <WebIcon />},
-    {txt: "Styling", icon: <StyleIcon />},
-    {txt: "Deploy", icon: <FilterDramaIcon />},
-    {txt: "Summary", icon: <StopIcon />}];
-
-  return (
-    <div className={classes.root}>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open
-          })
-        }}
-      >
-          <IconButton
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.iconButton, {[classes.hide]: open})}
-          >
-            <ChevronRightIcon />
-          </IconButton>
-          <IconButton
-            aria-label="close drawer"
-            onClick={handleDrawerClose}
-            className={clsx(classes.iconButton, classes.iconButtonClose, {[classes.hide]: !open})}>
-            <ChevronLeftIcon />
-          </IconButton>
-        <Divider />
-        <List>
-          {chapters.map((chapter) => (
-            <ListItem button key={chapter.txt}>
-              <div className={classes.chapterIcon}>{chapter.icon}</div>
-              <div className={classes.chapterTitle}>{chapter.txt}</div>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-    </div>
-  );
-}
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -146,5 +83,68 @@ const useStyles = makeStyles(theme => ({
   }
 
 }));
+
+const DrawerTM = () => {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  const chapters = [
+    {txt: "Intro", icon: <PlayArrowIcon />},
+    {txt: "Back End", icon: <StorageIcon />},
+    {txt: "Front End", icon: <WebIcon />},
+    {txt: "Styling", icon: <StyleIcon />},
+    {txt: "Deploy", icon: <FilterDramaIcon />},
+    {txt: "Summary", icon: <StopIcon />}];
+
+  return (
+    <div className={classes.root}>
+      <Drawer
+        variant="permanent"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open
+          })
+        }}
+      >
+          <IconButton
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(classes.iconButton, {[classes.hide]: open})}
+          >
+            <ChevronRightIcon />
+          </IconButton>
+          <IconButton
+            aria-label="close drawer"
+            onClick={handleDrawerClose}
+            className={clsx(classes.iconButton, classes.iconButtonClose, {[classes.hide]: !open})}>
+            <ChevronLeftIcon />
+          </IconButton>
+        <Divider />
+        <List>
+          {chapters.map((chapter) => (
+            <ListItem button key={chapter.txt}>
+              <div className={classes.chapterIcon}>{chapter.icon}</div>
+              <div className={classes.chapterTitle}>{chapter.txt}</div>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </div>
+  );
+}
 
 export default DrawerTM;

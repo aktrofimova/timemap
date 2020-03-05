@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles} from "@material-ui/core/styles";
-import DrawerTM from './DrawerTM';
+import DrawerTM from '../components/DrawerTM';
 
 
 const Presentation = (props) => {
