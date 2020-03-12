@@ -1,45 +1,75 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import Aux from '../hoc/Aux';
 import Logo from '../components/Logo';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem }from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
 const menuSeparator = <pre>  |  </pre>;
 
-class AppBarTM extends Component {
-  state = {
-    currentPath: '',
-    loggedIn: true
-  }
+const AppBarTM = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [currentPath, setCurrentPath] = React.useState(window.location.pathname);
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const isMenuOpen = Boolean(anchorEl);
+  const menuId = 'profile-menu';
 
-  componentDidMount() {
-    this.setState({currentPath: window.location.pathname});
-  }
+  const handleProfileMenuOpen = event => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  render() {
-    return (
-      <AppBar position="fixed">
-        <Toolbar>
-          {/*<IconButton edge="start" className="menu_btn" color="inherit" aria-label="menu">*/}
-            {/*<MenuIcon />*/}
-          {/*</IconButton>*/}
-          <Logo />{menuSeparator}
-          <Typography variant="h6" className="title">
-            {this.state.currentPath === '/' ? "TimeMap" : "Presentation"}
-          </Typography>{menuSeparator}
-          {this.state.loggedIn ?
-            <Aux><Typography variant="h6" className="title">Timesheet</Typography>{menuSeparator}</Aux> : null}
-          <IconButton edge="end" className="account_btn" color="inherit" aria-label="menu">
-            <AccountCircle />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-    );
-  }
+  const handleProfileMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const menuItems = loggedIn ? [
+      <MenuItem onClick={handleProfileMenuClose}>Profile</MenuItem>,
+      <MenuItem onClick={handleProfileMenuClose}>Something else</MenuItem>
+    ] :
+    [
+      <MenuItem onClick={handleProfileMenuClose}>Log in</MenuItem>,
+      <MenuItem onClick={handleProfileMenuClose}>Sign Up</MenuItem>
+    ]
+
+  return (
+    <AppBar position="fixed">
+      <Toolbar>
+        <Logo />{menuSeparator}
+
+        <Typography variant="h6" className="title">
+          {currentPath === '/' ? "TimeMap" : "Presentation"}
+        </Typography>{menuSeparator}
+
+        {loggedIn ?
+          <Aux><Typography variant="h6" className="title">Timesheet</Typography>{menuSeparator}</Aux> : null}
+
+        <IconButton
+          edge="end"
+          aria-label="profile menu"
+          aria-controls={menuId}
+          aria-haspopup="true"
+          onClick={handleProfileMenuOpen}
+          color="inherit"
+          className="account_btn"
+        >
+          <AccountCircle />
+        </IconButton>
+
+        <Menu
+          anchorEl={anchorEl}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          id={menuId}
+          keepMounted
+          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={isMenuOpen}
+          onClose={handleProfileMenuClose}
+        >
+          {menuItems.map(item => item)}
+        </Menu>
+
+      </Toolbar>
+    </AppBar>
+  );
 }
 
 export default AppBarTM;
