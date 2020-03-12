@@ -3,7 +3,6 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, MenuItem, Button } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import SnackbarTM from '../components/SnackbarTM';
 
 const projects = [
   {
@@ -50,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUp = () => {
+const SignUp = (props) => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     password: "",
@@ -95,7 +94,10 @@ const SignUp = () => {
         'Content-Type': 'application/json'
       }
     })
-      .then(() => showSnackbar())
+      .then(() => {
+        showSnackbar();
+        props.history.push("/users");
+      })
       .catch(err => console.log('Error', err));
   };
 
@@ -104,7 +106,6 @@ const SignUp = () => {
   };
 
   return (
-    <div>
       <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
         <div>
           <TextField
@@ -205,11 +206,6 @@ const SignUp = () => {
           Create
         </Button>
       </form>
-
-
-      {/*TODO: show snackbar on successful user creation */}
-      <SnackbarTM />
-    </div>
 
   );
 };
