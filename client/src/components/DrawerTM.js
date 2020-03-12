@@ -1,11 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import ListItem from "@material-ui/core/ListItem";
+import { Drawer, List, Divider, IconButton, ListItem } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
@@ -119,7 +115,7 @@ const DrawerTM = () => {
           {chapters.map((chapter) => (
             <ListItem button key={chapter.txt}>
               <div className={classes.chapterIcon}>{chapter.icon}</div>
-              <div className={classes.chapterTitle}>{chapter.txt}</div>
+              <div>{chapter.txt}</div>
             </ListItem>
           ))}
         </List>

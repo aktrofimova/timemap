@@ -1,15 +1,8 @@
 import React  from 'react';
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import IconButton from "@material-ui/core/IconButton";
-import MenuItem from "@material-ui/core/MenuItem";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import { TextField, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, MenuItem, Button} from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 const projects = [
   {
@@ -85,18 +78,23 @@ const SignUp = () => {
     setPosition(event.target.value);
   };
 
+  const handleSubmit = event => {
+    event.preventDefault();
+
+  };
+
   return (
-    <form className={classes.root} noValidate autoComplete="off">
+    <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
       <div>
         <TextField
           required
-          id="first-name"
+          id="firstName"
           label="First Name"
           variant="outlined"
         />
         <TextField
           required
-          id="last-name"
+          id="lastName"
           label="Last Name"
           variant="outlined"
         />
@@ -121,7 +119,7 @@ const SignUp = () => {
             Password
           </InputLabel>
           <OutlinedInput
-            id="outlined-adornment-password"
+            id="password"
             type={values.showPassword ? "text" : "password"}
             value={values.password}
             onChange={handleChange("password")}
@@ -145,7 +143,7 @@ const SignUp = () => {
       <div className={classes.root}>
         <div>
           <TextField
-            id="select-project"
+            id="selectProject"
             select
             label="Select"
             value={project}
@@ -161,7 +159,7 @@ const SignUp = () => {
           </TextField>
 
           <TextField
-            id="select-position"
+            id="selectPosition"
             select
             label="Select"
             value={position}
@@ -177,6 +175,14 @@ const SignUp = () => {
           </TextField>
         </div>
       </div>
+
+      <Button variant="outlined" color="secondary">
+        Cancel
+      </Button>
+
+      <Button variant="outlined" color="primary" type="submit">
+        Create
+      </Button>
     </form>
   );
 };
