@@ -1,38 +1,53 @@
 class UsersController < ApplicationController
-
-  def new
-    @user = User.new
-  end
+  before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
-  # GET /users.json
-  def show
-    render :json => User.all
+  def index
+    @users = User.all
+
+    render json: @users
   end
 
+  # GET /users/1
+  def show
+    render json: @user
+  end
+
+  # POST /users
   def create
     @user = User.new(user_params)
 
-    # store all emails in lowercase to avoid duplicates and case-sensitive login errors:
-    @user.email.downcase!
-
     if @user.save
-      # If user saves in the db successfully:
-      flash[:notice] = "Account created successfully!"
-      redirect_to root_path
+      render json: @user, status: :created, location: @user
     else
-      # If user fails model validation - probably a bad password or duplicate email:
-      flash.now.alert = "Oops, couldn't create account. Please make sure you are using a valid email and password and try again."
-      render :new
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
-  private
-
-  def user_params
-    # strong parameters - whitelist of allowed fields #=> permit(:name, :email, ...)
-    # that can be submitted by a form to the user model #=> require(:user)
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  # PATCH/PUT /users/1
+  def update
+    if @user.update(user_params)
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
   end
 
+  # DELETE /users/1
+  def destroy
+    @user.destroy
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def user_params
+      params.fetch(:user, {}).permit(:first_name, :last_name, :email, :password_digest)
+      # params.require(:user).permit(:first_name, :last_name, :email, :password_digest)
+    end
 end
+

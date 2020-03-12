@@ -29,7 +29,7 @@ class AppBarTM extends Component {
           {/*</IconButton>*/}
           <Logo />{menuSeparator}
           <Typography variant="h6" className="title">
-            {this.state.currentPath == '/' ? "TimeMap" : "Presentation"}
+            {this.state.currentPath === '/' ? "TimeMap" : "Presentation"}
           </Typography>{menuSeparator}
           {this.state.loggedIn ?
             <Aux><Typography variant="h6" className="title">Timesheet</Typography>{menuSeparator}</Aux> : null}
