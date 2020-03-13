@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Snackbar, IconButton, Button }from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 const SnackbarTM = (props) => {
   const queueRef = React.useRef([]);
-  const [open, setOpen] = React.useState(false);
-  const [messageInfo, setMessageInfo] = React.useState(undefined);
+  const [open, setOpen] = useState(false);
+  const [messageInfo, setMessageInfo] = useState(undefined);
 
   const processQueue = () => {
     if (queueRef.current.length > 0) {

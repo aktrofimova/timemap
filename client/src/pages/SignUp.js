@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useState } from 'react';
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, MenuItem, Button } from "@material-ui/core";
@@ -51,12 +51,12 @@ const useStyles = makeStyles(theme => ({
 
 const SignUp = (props) => {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     password: "",
     showPassword: false
   });
-  const [project, setProject] = React.useState("");
-  const [position, setPosition] = React.useState("");
+  const [project, setProject] = useState("");
+  const [position, setPosition] = useState("");
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value });
