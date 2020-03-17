@@ -31,12 +31,10 @@ class Login extends Component {
     axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
       .then(response => {
         if (response.data.logged_in) {
-          this.props.handleLogin(response.data)
-          this.redirect()
+          this.props.handleLogin(response.data);
+          this.redirect();
         } else {
-          this.setState({
-            errors: response.data.errors
-          })
+          this.setState({errors: response.data.errors});
         }
       })
       .catch(error => console.log('api errors:', error))
