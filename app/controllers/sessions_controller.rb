@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
+  include SessionHelper
+
   def create
+    # raise "#{response.body}"
     @user = User.find_by(email: session_params[:email])
 
     if @user && @user.authenticate(session_params[:password])
