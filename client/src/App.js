@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
 import Presentation from './pages/Presentation';
-// import SignUpMine from './pages/SignUp';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import TestUsers from './components/TestUsers';

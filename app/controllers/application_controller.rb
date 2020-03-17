@@ -5,7 +5,10 @@ class ApplicationController < ActionController::API
 
   module SessionHelper
     def login!
-      cookies[:user_id] = @user.id
+      cookies[:user_id] = {
+        :value => @user.id,
+        :expires => 7.days.from_now
+      }
     end
 
     def logged_in?
