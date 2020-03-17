@@ -9,7 +9,7 @@ class TestUsers extends Component {
     window.fetch('users')
       .then(response => response.json())
       .then(json => {
-        this.setState({users: json});
+        this.setState({users: json.users});
         // console.log(json);
       })
       .catch(error => console.log(error))
@@ -20,8 +20,9 @@ class TestUsers extends Component {
       <div>
         TEST <b>USERS</b> COMPONENT
         {this.state.users.map(user => (
-          <div key={user.id}>
-            <p>Name: {user.name}</p>
+          <div key={user.id} style={{boxShadow: '0 0 5px rgba(0,0,0,0.5)'}}>
+            <p>Name: {user.first_name}</p>
+            <p>Name: {user.last_name}</p>
             <p>E-Mail: {user.email}</p>
           </div>
         ))}

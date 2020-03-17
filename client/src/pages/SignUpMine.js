@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUp = (props) => {
+const SignUpMine = (props) => {
   const classes = useStyles();
   const [values, setValues] = useState({
     password: "",
@@ -210,4 +210,4 @@ const SignUp = (props) => {
   );
 };
 
-export default SignUp;
+export default SignUpMine;
