@@ -1,8 +1,11 @@
 class SessionsController < ApplicationController
   include SessionHelper
 
+  # Prevent session parameter from being passed
+  # Unpermitted parameter: session
+  wrap_parameters format: []
+
   def create
-    # raise "#{response.body}"
     @user = User.find_by(email: session_params[:email])
 
     if @user && @user.authenticate(session_params[:password])
@@ -29,7 +32,6 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    params.fetch(:user, {}).permit(:first_name, :last_name, :email, :password)
-    # params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:first_name, :last_name, :email, :password)
   end
 end
