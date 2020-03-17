@@ -1,23 +1,38 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import {Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField} from "@material-ui/core";
+import clsx from "clsx";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
 
 class Login extends Component {
   state = {
     email: '',
     password: '',
+    showPassword: false,
     errors: ''
   };
 
   componentWillMount() {
+    // TM-18
     return this.props.loggedInStatus ? this.redirect() : null
   }
 
   handleChange = (event) => {
-    const {name, value} = event.target
+    const {id, value} = event.target
     this.setState({
-      [name]: value
+      [id]: value
     })
+  };
+
+  handleClickShowPassword = () => {
+    this.setState((prevState) => {
+      return {showPassword: !prevState.showPassword}
+    });
+  };
+
+  handleMouseDownPassword = event => {
+    event.preventDefault();
   };
 
   handleSubmit = (event) => {
@@ -57,30 +72,45 @@ class Login extends Component {
   };
 
   render() {
-    const {email, password} = this.state
     return (
       <div>
         <h1>Log In</h1>
         <form onSubmit={this.handleSubmit}>
-          <input
-            placeholder="email"
-            type="text"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
-          <button placeholder="submit" type="submit">
-            Log In
-          </button>
           <div>
-            or <Link to='/signup'>sign up</Link>
+            <TextField required variant="outlined" type="email" id="email" label="E-Mail"/>
+          </div>
+
+          <div>
+            <FormControl required variant="outlined">
+              <InputLabel htmlFor="password">
+                Password
+              </InputLabel>
+              <OutlinedInput
+                id="password"
+                type={this.state.showPassword ? "text" : "password"}
+                value={this.state.password}
+                onChange={this.handleChange}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={this.handleClickShowPassword}
+                      onMouseDown={this.handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                labelWidth={85}
+              />
+            </FormControl>
+          </div>
+
+          <div>
+            <Button variant="outlined" color="secondary">Go to presentation</Button>
+            <Button variant="outlined" color="primary" type="submit">Log In</Button>
+            <Button variant="outlined" color="default"><Link to='/signup'>Sign up</Link></Button>
           </div>
 
         </form>

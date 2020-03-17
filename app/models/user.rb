@@ -4,10 +4,10 @@ class User < ApplicationRecord
   before_save { self.email = email.downcase }
 
   # validates :first_name, presence: true,
-  # #          uniqueness: { case_sensitive: false }
-
   # validates :last_name, presence: true,
-  # #         uniqueness: { case_sensitive: false }
+  # validates :project, presence: true,
+  # validates :position, presence: true,
+
 
   # Add validations for project and position(role)
 

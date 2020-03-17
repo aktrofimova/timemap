@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login!
-      render json: {user: @user, status: :created, location: @user}
+      render json: {user: @user, status: :created}
     else
       render json: @user.errors, status: :unprocessable_entity
     end
