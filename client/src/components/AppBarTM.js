@@ -12,7 +12,6 @@ const menuSeparator = <pre>  |  </pre>;
 const AppBarTM = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentPath] = useState(window.location.pathname);
-  const [loggedIn] = useState(props.loggedInStatus);
   const isMenuOpen = Boolean(anchorEl);
   const menuId = 'profile-menu';
 
@@ -34,9 +33,9 @@ const AppBarTM = (props) => {
       .catch(error => console.log(error))
   }
 
-  const menuItems = loggedIn ? [
-      <MenuItem onClick={handleProfileMenuClose}>Profile</MenuItem>,
-      <MenuItem onClick={handleLogout}><Link to="/">Log out</Link></MenuItem>
+    const menuItems = props.loggedInStatus ? [
+      <MenuItem key="profile" onClick={handleProfileMenuClose}>Profile</MenuItem>,
+      <MenuItem key="logout" onClick={handleLogout}><Link to="/">Log out</Link></MenuItem>
     ] :
     [
       <MenuItem key="login" onClick={handleProfileMenuClose}><Link to="/login">Log in</Link></MenuItem>,
@@ -52,7 +51,7 @@ const AppBarTM = (props) => {
           {currentPath === '/' ? "TimeMap" : "Presentation"}
         </Typography>{menuSeparator}
 
-        {loggedIn ?
+        {props.loggedInStatus ?
           <Aux><Typography variant="h6" className="title">Timesheet</Typography>{menuSeparator}</Aux> : null}
 
         <IconButton

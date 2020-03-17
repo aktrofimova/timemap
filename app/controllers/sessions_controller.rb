@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
     if logged_in? && current_user
       render json: {logged_in: true, user: current_user}
     else
-      render json: {logged_in: false, message: 'no such user'}
+      render json: {logged_in: false, message: 'no user logged in'}
     end
   end
 

@@ -39,9 +39,9 @@ class App extends Component {
       {withCredentials: true}) // This allows our Rails server to set and read the cookie on the front-end’s browser. ALWAYS pass this argument!
       .then(response => {
         if (response.data.logged_in) {
-          this.handleLogin(response)
+          this.handleLogin(response);
         } else {
-          this.handleLogout()
+          this.handleLogout();
         }
       })
       .catch(error => console.log('api errors:', error))

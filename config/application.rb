@@ -37,6 +37,6 @@ module Timemap
     config.api_only = true
 
     # cookies are not includded in rails-api by defailt so neew the following line below (as well as 'include ActionController::Cookies' is a controller)
-    # config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Cookies
   end
 end
