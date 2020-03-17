@@ -1,6 +1,7 @@
 import React, { useState }  from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { makeStyles} from "@material-ui/core/styles";
 import Aux from '../hoc/Aux';
 import Logo from '../components/Logo';
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem }from '@material-ui/core';
@@ -8,8 +9,24 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
 const menuSeparator = <pre>  |  </pre>;
+const useStyles = makeStyles(() => ({
+  menu: {
+    '& li': {
+      padding: 0
+    },
+    '& a, span': {
+      margin: 'auto',
+      padding: '5px 25px'
+    },
+    '& a': {
+      width: '100%',
+      textAlign: 'center'
+    }
+  }
+}));
 
 const AppBarTM = (props) => {
+  const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentPath] = useState(window.location.pathname);
   const isMenuOpen = Boolean(anchorEl);
@@ -67,6 +84,7 @@ const AppBarTM = (props) => {
         </IconButton>
 
         <Menu
+          className={classes.menu}
           anchorEl={anchorEl}
           anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
           id={menuId}
