@@ -1,9 +1,8 @@
-import React  from 'react';
+import React, { useState } from 'react';
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, MenuItem, Button } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import SnackbarTM from '../components/SnackbarTM';
 
 const projects = [
   {
@@ -50,14 +49,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUp = () => {
+const SignUpMine = (props) => {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     password: "",
     showPassword: false
   });
-  const [project, setProject] = React.useState("");
-  const [position, setPosition] = React.useState("");
+  const [project, setProject] = useState("");
+  const [position, setPosition] = useState("");
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value });
@@ -95,7 +94,10 @@ const SignUp = () => {
         'Content-Type': 'application/json'
       }
     })
-      .then(() => showSnackbar())
+      .then(() => {
+        showSnackbar();
+        props.history.push("/users");
+      })
       .catch(err => console.log('Error', err));
   };
 
@@ -104,7 +106,6 @@ const SignUp = () => {
   };
 
   return (
-    <div>
       <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
         <div>
           <TextField
@@ -206,12 +207,7 @@ const SignUp = () => {
         </Button>
       </form>
 
-
-      {/*TODO: show snackbar on successful user creation */}
-      <SnackbarTM />
-    </div>
-
   );
 };
 
-export default SignUp;
+export default SignUpMine;

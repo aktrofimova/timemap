@@ -1,16 +1,26 @@
 class UsersController < ApplicationController
+  include SessionHelper
+
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
   def index
     @users = User.all
 
-    render json: @users
+    if @users
+      render json: {users: @users}
+    else
+      render json: {status: 404, message: 'no users found'}
+    end
   end
 
   # GET /users/1
   def show
-    render json: @user
+    if @user
+      render json: {user: @user}
+    else
+      render json: {status: 404, message: 'user not found'}
+    end
   end
 
   # POST /users
@@ -18,7 +28,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, status: :created, location: @user
+      login!
+      render json: {user: @user}, status: :created, location: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -27,7 +38,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      render json: @user
+      render json: {user: @user}
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -41,12 +52,12 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+        @user = User.find_by_id(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.fetch(:user, {}).permit(:first_name, :last_name, :email, :password_digest)
+      params.fetch(:user, {}).permit(:first_name, :last_name, :email, :password, :password_confirmation)
       # params.require(:user).permit(:first_name, :last_name, :email, :password_digest)
     end
 end

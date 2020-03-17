@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { Drawer, List, Divider, IconButton, ListItem } from "@material-ui/core";
@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
 
 const DrawerTM = () => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
