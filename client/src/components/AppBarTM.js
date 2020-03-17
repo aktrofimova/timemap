@@ -51,7 +51,7 @@ const AppBarTM = (props) => {
   }
 
     const menuItems = props.loggedInStatus ? [
-      <MenuItem key="profile" onClick={handleProfileMenuClose}>Profile</MenuItem>,
+        <MenuItem key="profile" onClick={handleProfileMenuClose}><Link to="/">Profile</Link></MenuItem>,
       <MenuItem key="logout" onClick={handleLogout}><Link to="/">Log out</Link></MenuItem>
     ] :
     [
