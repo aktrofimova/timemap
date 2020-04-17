@@ -54,8 +54,8 @@ Member.create([{user_id: 1, project_id: 1},
                {user_id: 13, project_id: 3},
                {user_id: 14, project_id: 3},
                {user_id: 15, project_id: 3},
+               {user_id: 16, project_id: 3},
                {user_id: 17, project_id: 3},
-               {user_id: 18, project_id: 3},
                {user_id: 18, project_id: 3}])
 
 # create tasks
