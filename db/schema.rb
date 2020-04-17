@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_17_184622) do
+ActiveRecord::Schema.define(version: 2020_04_17_204609) do
 
   create_table "members", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2020_04_17_184622) do
     t.integer "user_id"
     t.integer "project_id"
     t.index ["project_id"], name: "index_members_on_project_id"
+    t.index ["user_id", "project_id"], name: "index_members_on_user_id_and_project_id", unique: true
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
