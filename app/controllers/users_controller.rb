@@ -8,7 +8,11 @@ class UsersController < ApplicationController
     @users = User.all
 
     if @users
-      render json: {users: @users}
+      users_hash = @users.map do |user|
+        user.base_hash
+          .merge!(:project => user.project&.display_name)
+      end
+      render json: {users: users_hash}
     else
       render json: {status: 404, message: 'no users found'}
     end
@@ -17,7 +21,8 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     if @user
-      render json: {user: @user}
+      render json: {user: @user.base_hash
+                            .merge!(:project => @user.project&.display_name)}
     else
       render json: {status: 404, message: 'user not found'}
     end
@@ -50,15 +55,16 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-        @user = User.find_by_id(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def user_params
-      params.fetch(:user, {}).permit(:first_name, :last_name, :email, :password, :password_confirmation)
-      # params.require(:user).permit(:first_name, :last_name, :email, :password_digest)
-    end
+  def set_user
+    @user = User.find_by_id(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def user_params
+    params.fetch(:user, {}).permit(:name, :email, :password, :password_confirmation, :position, :role, :vac_days_left)
+    # params.require(:user).permit(:first_name, :last_name, :email, :password_digest)
+  end
+
 end
 

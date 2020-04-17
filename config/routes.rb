@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
   resources :users, only: [:create, :show, :index]
-  # resources :users
+  resources :users
+  resources :projects
+  # resources :members
+  resources :tasks
+  # resources :timeoffs
 
-  # root to: 'users#show'
+  root to: 'users#index'
 
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

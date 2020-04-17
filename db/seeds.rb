@@ -5,3 +5,61 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+# create projects
+Project.create([{ display_name: "First Project", name_identifier: "fproj", details: "This is a first project's info" },
+                { display_name: "Second Project", name_identifier: "sproj", details: "Detailed information" },
+                { display_name: "Third Project", name_identifier: "tproj", details: "Some details about project" }]);
+
+# create users
+User.create([{name: "James Smith", email: "js@tm.com", password: "pass", position: "Dev", role: "employee", vac_days_left: 18 , has_extended_access: false},
+             {name: "Mary Jones", email: "mj@tm.com", password: "pass", position: "QA", role: "employee", vac_days_left: 16, has_extended_access: false},
+             {name: "Charles Williams", email: "cw@tm.com", password: "pass", position: "PM", role: "manager", vac_days_left: 13, has_extended_access: false},
+             {name: "Patricia Taylor", email: "pt@tm.com", password: "pass", position: "Client", role: "client", vac_days_left: nil, has_extended_access: false},
+
+             {name: "Robert Davies", email: "rd@tm.com", password: "pass", position: "Dev", role: "employee", vac_days_left: 8, has_extended_access: false},
+             {name: "Jennifer Brown", email: "jb@tm.com", password: "pass", position: "Sysadmin", role: "employee", vac_days_left: 10, has_extended_access: false},
+             {name: "Michael Wilson", email: "mw@tm.com", password: "pass", position: "QA", role: "employee", vac_days_left: 7, has_extended_access: false},
+             {name: "Linda Evans", email: "le@tm.com", password: "pass", position: "PM", role: "manager", vac_days_left: 5, has_extended_access: false},
+             {name: "William Thomas", email: "wt@tm.com", password: "pass", position: "client", role: "client", vac_days_left: nil, has_extended_access: false},
+             {name: "Elizabeth Johnson", email: "ej@tm.com", password: "pass", position: "client", role: "client", vac_days_left: nil, has_extended_access: false},
+
+             {name: "David Roberts", email: "dr@tm.com", password: "pass", position: "Dev", role: "employee", vac_days_left: 16, has_extended_access: false},
+             {name: "Barbara Walker", email: "bw@tm.com", password: "pass", position: "Dev", role: "employee", vac_days_left: 18, has_extended_access: false},
+             {name: "Richard Wright", email: "rw@tm.com", password: "pass", position: "Sysadmin", role: "employee", vac_days_left: 18, has_extended_access: false},
+             {name: "Susan Robinson", email: "sr@tm.com", password: "pass", position: "QA", role: "employee", vac_days_left: 12, has_extended_access: false},
+             {name: "Joseph Thompson", email: "jt@tm.com", password: "pass", position: "QA", role: "employee", vac_days_left: 13, has_extended_access: false},
+             {name: "Jessica White", email: "jw@tm.com", password: "pass", position: "PM", role: "manager", vac_days_left: 9, has_extended_access: false},
+             {name: "Thomas Hughes", email: "th@tm.com", password: "pass", position: "client", role: "client", vac_days_left: nil, has_extended_access: false},
+             {name: "Sarah Edwards", email: "se@tm.com", password: "pass", position: "Clien", role: "client", vac_days_left: nil, has_extended_access: false},
+
+             {name: "Admin Admin", email: "admin@tm.com", password: "admin", position: "System Administrator", role: "manager", vac_days_left: nil, has_extended_access: true}]);
+
+# create users_projects relation
+Member.create([{user_id: 1, project_id: 1},
+               {user_id: 2, project_id: 1},
+               {user_id: 3, project_id: 1},
+               {user_id: 4, project_id: 1},
+
+               {user_id: 5, project_id: 2},
+               {user_id: 6, project_id: 2},
+               {user_id: 7, project_id: 2},
+               {user_id: 8, project_id: 2},
+               {user_id: 9, project_id: 2},
+               {user_id: 10, project_id: 2},
+
+               {user_id: 11, project_id: 3},
+               {user_id: 12, project_id: 3},
+               {user_id: 13, project_id: 3},
+               {user_id: 14, project_id: 3},
+               {user_id: 15, project_id: 3},
+               {user_id: 17, project_id: 3},
+               {user_id: 18, project_id: 3},
+               {user_id: 18, project_id: 3}])
+
+# create tasks
+# Task.create([])
+
+# create timeoffs
+# Timeoff.create([])
