@@ -63,7 +63,7 @@ class UsersController < ApplicationController
       end
       render json: {tasks: tasks}
     else
-      render json: {status: 404, message: 'user\'s tasks not found'}
+      render json: {status: 404, message: 'user not found'}
     end
   end
 
@@ -78,7 +78,7 @@ class UsersController < ApplicationController
 
       render json: {timeoffs: timeoffs}
     else
-      render json: {status: 404, message: 'user\'s timeoffs not found'}
+      render json: {status: 404, message: 'user not found'}
     end
   end
 

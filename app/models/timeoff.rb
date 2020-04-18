@@ -1,6 +1,4 @@
 class Timeoff < ApplicationRecord
-  require 'date'
-
   belongs_to :user
 
   def total_days
