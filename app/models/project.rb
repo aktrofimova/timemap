@@ -6,10 +6,10 @@ class Project < ApplicationRecord
 
   def base_hash
     {
-      :id => self.id,
-      :display_name => self.display_name,
-      :name_identifier => self.name_identifier,
-      :details => self.details
+      :id => id,
+      :display_name => display_name,
+      :name_identifier => name_identifier,
+      :details => details
     }
   end
 end

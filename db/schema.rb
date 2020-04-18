@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_17_204609) do
+ActiveRecord::Schema.define(version: 2020_04_18_120912) do
 
   create_table "members", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -40,24 +40,18 @@ ActiveRecord::Schema.define(version: 2020_04_17_204609) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
-    t.integer "project_id"
     t.string "name_identifier"
-    t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "timeoffs", force: :cascade do |t|
-    t.string "display_name"
     t.date "start_date"
     t.date "end_date"
-    t.integer "total_days"
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
-    t.integer "project_id"
     t.string "name_identifier"
-    t.index ["project_id"], name: "index_timeoffs_on_project_id"
     t.index ["user_id"], name: "index_timeoffs_on_user_id"
   end
 
@@ -75,8 +69,6 @@ ActiveRecord::Schema.define(version: 2020_04_17_204609) do
 
   add_foreign_key "members", "projects"
   add_foreign_key "members", "users"
-  add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "users"
-  add_foreign_key "timeoffs", "projects"
   add_foreign_key "timeoffs", "users"
 end

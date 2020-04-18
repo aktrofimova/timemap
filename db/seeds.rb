@@ -58,8 +58,12 @@ Member.create([{user_id: 1, project_id: 1},
                {user_id: 17, project_id: 3},
                {user_id: 18, project_id: 3}])
 
-# create tasks
-# Task.create([])
+# create timeoffs for users
+Timeoff.create([{ user_id: 1, name_identifier: "vac", start_date: "2020-06-02", end_date: "2020-06-05", status: "approved"},
+{ user_id: 1, name_identifier: "vac", start_date: "2020-07-02", end_date: "2020-07-02", status: "pending"},
+{ user_id: 1, name_identifier: "ill", start_date: "2020-04-13", end_date: "2020-04-15", status: "approved"},
+{ user_id: 2, name_identifier: "vac", start_date: "2020-04-17", end_date: "2020-04-19", status: "pending"},
+{ user_id: 2, name_identifier: "vac", start_date: "2020-08-10", end_date: "2020-08-14", status: "approved"}])
 
-# create timeoffs
-# Timeoff.create([])
+# create tasks for users
+# Task.create([])

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include SessionHelper
 
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy, :user_tasks, :user_timeoffs]
 
   # GET /users
   def index
@@ -52,6 +52,34 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     @user.destroy
+  end
+
+  # GET /users/1/tasks
+  def user_tasks
+    if @user
+
+      tasks = @user.tasks.map do |task|
+        task.base_hash
+      end
+      render json: {tasks: tasks}
+    else
+      render json: {status: 404, message: 'user\'s tasks not found'}
+    end
+  end
+
+  # GET /users/1/timeoffs
+  def user_timeoffs
+    if @user
+      all = @user.timeoffs
+
+      timeoffs = all.map do |timeoff|
+        timeoff.base_hash
+      end
+
+      render json: {timeoffs: timeoffs}
+    else
+      render json: {status: 404, message: 'user\'s timeoffs not found'}
+    end
   end
 
   private

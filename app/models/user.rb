@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
+
   has_many :members
   has_many :projects, :through => :members
   has_many :tasks
@@ -21,17 +22,17 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL_REGEX }
 
   def project
-    self.projects.first
+    projects.first
   end
 
   def base_hash
     {
-      :id => self.id,
-      :name => self.name,
-      :email => self.email,
-      :position => self.position,
-      :role => self.role,
-      :vac_days_left => self.vac_days_left,
+      :id => id,
+      :name => name,
+      :email => email,
+      :position => position,
+      :role => role,
+      :vac_days_left => vac_days_left,
     }
   end
 end

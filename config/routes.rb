@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :users, only: [:create, :show, :index]
+  # resources :users, only: [:create, :show, :index]
   resources :users
+  get '/users/:id/tasks', to: 'users#user_tasks'
+  get '/users/:id/timeoffs', to: 'users#user_timeoffs'
   resources :projects
   # resources :members
   resources :tasks
