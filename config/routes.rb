@@ -1,9 +1,22 @@
 Rails.application.routes.draw do
 
-  resources :users, only: [:create, :show, :index]
-  # resources :users
+  namespace :api do
 
-  # root to: 'users#show'
+    # resources :users, only: [:create, :show, :index]
+    resources :users
+    get 'api/users/:id/tasks', to: 'users#user_tasks'
+    get 'api/users/:id/timeoffs', to: 'users#user_timeoffs'
+    resources :projects
+    # resources :members
+    resources :tasks
+    # resources :timeoffs
+
+    # GET localhost:3001/api
+    root to: 'users#index'
+  end
+
+  # GET localhost:3001/
+  root to: 'api/users#index'
 
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
