@@ -1,3 +1,0 @@
-class MembersController < ApplicationController
-
-end

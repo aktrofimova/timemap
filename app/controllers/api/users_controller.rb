@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Api::UsersController < ApplicationController
   include SessionHelper
 
   before_action :set_user, only: [:show, :update, :destroy, :user_tasks, :user_timeoffs]
