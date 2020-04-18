@@ -22,6 +22,10 @@ const useStyles = makeStyles(() => ({
       width: '100%',
       textAlign: 'center'
     }
+  },
+  AppBar: {
+    backgroundColor: 'white',
+    color: '#00293c'
   }
 }));
 
@@ -44,8 +48,9 @@ const AppBarTM = (props) => {
     handleProfileMenuClose();
     axios.delete('http://localhost:3001/logout', {withCredentials: true})
       .then(response => {
-        props.handleLogout()
-        props.history.push('/')
+        props.handleLogout();
+        props.history.push('/');
+        // return (<Redirect to = {HomeURL} />);
       })
       .catch(error => console.log(error))
   }
@@ -60,7 +65,7 @@ const AppBarTM = (props) => {
     ]
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" className={classes.AppBar}>
       <Toolbar>
         <Logo />{menuSeparator}
 

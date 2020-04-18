@@ -52,6 +52,10 @@ class Signup extends Component {
     errors: ''
   };
 
+  componentDidMount() {
+    return this.props.loggedInStatus ? this.redirect() : null
+  }
+
   handleChange = (event) => {
     const {id, value} = event.target
     this.setState({
@@ -77,7 +81,7 @@ class Signup extends Component {
       password: password,
       password_confirmation: passwordConfirmation
     }
-    axios.post('http://localhost:3001/users', {user}, {withCredentials: true})
+    axios.post('http://localhost:3001/api/users', {user}, {withCredentials: true})
       .then(response => {
         if (response.data.status === 'created') {
           this.props.handleLogin(response.data)

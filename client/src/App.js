@@ -58,11 +58,12 @@ class App extends Component {
           <Switch>
 
             <Route path="/signup" render={props => (
-              <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>
+              // without timeout the initial value is taken earlier than it is set to the correct one (taken from api endpoint logged_in)
+              <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={setTimeout(()=>{return this.state.isLoggedIn},0)}/>
             )} />
 
             <Route path="/login" render={props => (
-              <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>
+              <Login {...props} handleLogin={this.handleLogin} loggedInStatus={setTimeout(()=>{return this.state.isLoggedIn},0)}/>
             )} />
 
             <Route path="/users" component={TestUsers}></Route>

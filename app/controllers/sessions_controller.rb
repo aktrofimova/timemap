@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
 
     if @user && @user.authenticate(session_params[:password])
       login!
-      render json: {logged_in: true, user: @user}
+      render json: {logged_in: true, user: @user.base_hash}
     else
       render json: {status: 401, message: 'no such user, verify credentials and try again or signup'}
     end
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
 
   def is_logged_in?
     if logged_in? && current_user
-      render json: {logged_in: true, user: current_user}
+      render json: {logged_in: true, user: current_user.base_hash}
     else
       render json: {logged_in: false, message: 'no user logged in'}
     end

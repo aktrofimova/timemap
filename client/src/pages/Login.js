@@ -13,8 +13,7 @@ class Login extends Component {
     errors: ''
   };
 
-  componentWillMount() {
-    // TM-18
+  componentDidMount() {
     return this.props.loggedInStatus ? this.redirect() : null
   }
 
@@ -77,7 +76,7 @@ class Login extends Component {
         <h1>Log In</h1>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <TextField required variant="outlined" type="email" id="email" label="E-Mail"/>
+            <TextField required variant="outlined" type="email" id="email" label="E-Mail" onChange={this.handleChange}/>
           </div>
 
           <div>

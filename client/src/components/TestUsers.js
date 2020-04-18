@@ -7,7 +7,7 @@ class TestUsers extends Component {
   }
 
   componentDidMount() {
-    window.fetch('users')
+    window.fetch('api/users')
       .then(response => response.json())
       .then(json => this.setState({users: json.users}))
       .catch(error => console.log(error))
