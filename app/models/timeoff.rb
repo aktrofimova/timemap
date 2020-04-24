@@ -22,8 +22,9 @@ class Timeoff < ApplicationRecord
 
   def base_hash
     {
+      :id => id,
       :name_identifier => name_identifier,
-      :project_id => user.project&.display_name,
+      :project => user.project&.display_name,
       :start_date => start_date,
       :end_date => end_date,
       :total_days => total_days,

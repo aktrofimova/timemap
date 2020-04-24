@@ -12,10 +12,11 @@ class Task < ApplicationRecord
 
   def base_hash
     {
+      :id => id,
       :display_name => display_name,
       :name_identifier => name_identifier,
       :details => details,
-      :project_id => user.project.display_name,
+      :project => user.project.display_name,
       :date => date,
       :hours => hours || calc_hours(started_at, ended_at),
       :started_at => format_time(started_at) || '',
