@@ -4,12 +4,22 @@ import { Link } from 'react-router-dom';
 import { makeStyles} from "@material-ui/core/styles";
 import Aux from '../hoc/Aux';
 import Logo from '../components/Logo';
-import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem }from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Menu, MenuItem }from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
-const menuSeparator = <pre>  |  </pre>;
 const useStyles = makeStyles(() => ({
+  app_bar: {
+    backgroundColor: 'white',
+    color: '#00293c'
+  },
+  tool_bar: {
+
+  },
+  app_bar_item: {
+    fontSize: '18px',
+    padding: '0 15px'
+  },
   menu: {
     '& li': {
       padding: 0
@@ -22,10 +32,6 @@ const useStyles = makeStyles(() => ({
       width: '100%',
       textAlign: 'center'
     }
-  },
-  AppBar: {
-    backgroundColor: 'white',
-    color: '#00293c'
   }
 }));
 
@@ -49,6 +55,7 @@ const AppBarTM = (props) => {
     axios.delete('http://localhost:3001/logout', {withCredentials: true})
       .then(response => {
         props.handleLogout();
+        // TM-27
         props.history.push('/');
         // return (<Redirect to = {HomeURL} />);
       })
@@ -64,17 +71,25 @@ const AppBarTM = (props) => {
       <MenuItem key="signup" onClick={handleProfileMenuClose}><Link to="/signup">Sign Up</Link></MenuItem>
     ]
 
-  return (
-    <AppBar position="fixed" className={classes.AppBar}>
-      <Toolbar>
-        <Logo />{menuSeparator}
+  // console.log(props);
 
-        <Typography variant="h6" className="title">
-          {currentPath === '/' ? "TimeMap" : "Presentation"}
-        </Typography>{menuSeparator}
+  return (
+    <AppBar position="fixed" className={classes.app_bar}>
+      <Toolbar className={classes.tool_bar}>
+        <Logo className={classes.app_bar_item} />
 
         {props.loggedInStatus ?
-          <Aux><Typography variant="h6" className="title">Timesheet</Typography>{menuSeparator}</Aux> : null}
+          <Aux>
+            <p className={classes.app_bar_item}>Timesheet</p>
+            <p className={classes.app_bar_item}>Other button</p>
+          </Aux> :
+          <p className={classes.app_bar_item}>TimeMap</p>
+        }
+
+
+        {props.loggedInStatus ?
+          <p className={classes.app_bar_item}>{props.currentUser.name}</p> : null}
+
 
         <IconButton
           edge="end"

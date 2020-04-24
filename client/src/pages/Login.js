@@ -14,6 +14,7 @@ class Login extends Component {
   };
 
   componentDidMount() {
+    // TM-18: why it doesn't work???
     return this.props.loggedInStatus ? this.redirect() : null
   }
 
@@ -45,7 +46,7 @@ class Login extends Component {
     axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
       .then(response => {
         if (response.data.logged_in) {
-          this.props.handleLogin(response.data);
+          this.props.handleLogin(response);
           this.redirect();
         } else {
           this.setState({errors: response.data.errors});

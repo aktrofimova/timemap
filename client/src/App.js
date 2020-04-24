@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
-import Presentation from './pages/Presentation';
+import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import TestUsers from './components/TestUsers';
@@ -20,10 +20,10 @@ class App extends Component {
     this.loginStatus()
   }
 
-  handleLogin = (data) => {
+  handleLogin = (event) => {
     this.setState({
       isLoggedIn: true,
-      user: data.user
+      user: event.data.user
     })
   }
   handleLogout = () => {
@@ -50,7 +50,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <AppBarTM loggedInStatus={this.state.isLoggedIn} handleLogout={this.handleLogout}/>
+        <AppBarTM loggedInStatus={this.state.isLoggedIn} currentUser={this.state.user} handleLogout={this.handleLogout}/>
 
         <main style={{marginTop: "94px"}}>
           {/* with exact the order doesn't matter, w/o exact it does */}
@@ -58,17 +58,16 @@ class App extends Component {
           <Switch>
 
             <Route path="/signup" render={props => (
-              // without timeout the initial value is taken earlier than it is set to the correct one (taken from api endpoint logged_in)
-              <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={setTimeout(()=>{return this.state.isLoggedIn},0)}/>
+              <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>
             )} />
 
             <Route path="/login" render={props => (
-              <Login {...props} handleLogin={this.handleLogin} loggedInStatus={setTimeout(()=>{return this.state.isLoggedIn},0)}/>
+              <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>
             )} />
 
             <Route path="/users" component={TestUsers}></Route>
 
-            <Route path="/" component={Presentation}></Route>
+            <Route path="/" component={Home}></Route>
 
           </Switch>
         </main>
