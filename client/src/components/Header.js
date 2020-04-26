@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ({
 const Header = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [currentPath] = useState(window.location.pathname);
+  // const [currentPath] = useState(window.location.pathname);
   const isMenuOpen = Boolean(anchorEl);
   const menuId = 'profile-menu';
 
