@@ -35,7 +35,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const AppBarTM = (props) => {
+const Header = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentPath] = useState(window.location.pathname);
@@ -121,4 +121,4 @@ const AppBarTM = (props) => {
   );
 }
 
-export default AppBarTM;
+export default Header;

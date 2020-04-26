@@ -5,7 +5,8 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import TestUsers from './components/TestUsers';
-import AppBarTM from "./components/AppBarTM";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 import './App.css';
 
@@ -50,7 +51,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <AppBarTM loggedInStatus={this.state.isLoggedIn} currentUser={this.state.user} handleLogout={this.handleLogout}/>
+        <Header loggedInStatus={this.state.isLoggedIn} currentUser={this.state.user} handleLogout={this.handleLogout}/>
 
         <main style={{marginTop: "94px"}}>
           {/* with exact the order doesn't matter, w/o exact it does */}
@@ -71,6 +72,8 @@ class App extends Component {
 
           </Switch>
         </main>
+
+        <Footer />
 
       </div>
     );
