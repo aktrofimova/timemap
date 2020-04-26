@@ -6,19 +6,14 @@ import Aux from '../hoc/Aux';
 import Logo from '../components/Logo';
 import { AppBar, Toolbar, IconButton, Menu, MenuItem }from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import logo from "../logo-coloured.svg";
 
 
 const useStyles = makeStyles(() => ({
   app_bar: {
     backgroundColor: 'white',
-    color: '#00293c'
-  },
-  tool_bar: {
-
-  },
-  app_bar_item: {
-    fontSize: '18px',
-    padding: '0 15px'
+    color: '#00293c',
+    padding: '0 40px'
   },
   menu: {
     '& li': {
@@ -76,46 +71,47 @@ const Header = (props) => {
   return (
     <AppBar position="fixed" className={classes.app_bar}>
       <Toolbar className={classes.tool_bar}>
-        <Logo className={classes.app_bar_item} />
+        <div className="tool_bar_left">
+          <Logo />
 
-        {props.loggedInStatus ?
-          <Aux>
-            <p className={classes.app_bar_item}>Timesheet</p>
-            <p className={classes.app_bar_item}>Other button</p>
-          </Aux> :
-          <p className={classes.app_bar_item}>TimeMap</p>
-        }
+          {props.loggedInStatus ?
+            <Aux>
+              <p className="tool_bar_item">Timesheet</p>
+              <p className="tool_bar_item">Other button</p>
+            </Aux> :
+            <Link to="/" className="tool_bar_item">TimeMap</Link>
+          }
+        </div>
 
+        <div className="tool_bar_right">
+          {props.loggedInStatus ?
+            <p className="tool_bar_item name">{props.currentUser.name}</p> : null}
 
-        {props.loggedInStatus ?
-          <p className={classes.app_bar_item}>{props.currentUser.name}</p> : null}
+          <IconButton
+            className="tool_bar_item account"
+            edge="end"
+            aria-label="profile menu"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
+            color="inherit"
+          >
+            <AccountCircle style={{ fontSize: 28 }}/>
+          </IconButton>
 
-
-        <IconButton
-          edge="end"
-          aria-label="profile menu"
-          aria-controls={menuId}
-          aria-haspopup="true"
-          onClick={handleProfileMenuOpen}
-          color="inherit"
-          className="account_btn"
-        >
-          <AccountCircle />
-        </IconButton>
-
-        <Menu
-          className={classes.menu}
-          anchorEl={anchorEl}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          id={menuId}
-          keepMounted
-          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-          open={isMenuOpen}
-          onClose={handleProfileMenuClose}
-        >
-          {menuItems.map(item => item)}
-        </Menu>
-
+          <Menu
+            className={classes.menu}
+            anchorEl={anchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            id={menuId}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMenuOpen}
+            onClose={handleProfileMenuClose}
+          >
+            {menuItems.map(item => item)}
+          </Menu>
+        </div>
       </Toolbar>
     </AppBar>
   );

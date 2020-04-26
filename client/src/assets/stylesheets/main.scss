@@ -1,5 +1,117 @@
-@import './colors', './footer';
+@import 'variables', './mixins'; // helper files
 
 .App {
   color: $blue_dark;
+  padding: 0 50px;
 }
+
+.main {
+  padding-top: $header_height;
+}
+
+.header {
+  @include header_dash;
+}
+
+.cta_btn {
+  @include transition;
+  font-size: 18px;
+  border: 2px solid;
+  background-color: white;
+  padding: 15px 20px;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 20px auto;
+  max-width: 300px;
+
+  &.primary {
+    border-color: $pink_dark;
+    color: $pink_dark;
+    &:hover {
+      background-color: $pink_dark;
+    }
+  }
+
+  &.secondary {
+    border-color: $blue_dark;
+    color: $blue_dark;
+    &:hover {
+      background-color: $blue_dark;
+    }
+  }
+
+  &:hover {
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.cta_link {
+  //text-decoration: none;
+  color: $pink_dark;
+}
+
+.form {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  &_block {
+    display: flex;
+    justify-content: space-between;
+
+    & > * {
+      flex-basis: 48%;
+    }
+  }
+
+  &_input {
+    margin: 0 0 20px !important;
+    text-align: left;
+  }
+
+  &_buttons {
+    button {
+      @include transition;
+      background-color: white;
+      border: 1px solid;
+      border-radius: 5px;
+      padding: 13px 0;
+      font-size: 16px;
+      font-weight: bold;
+
+      &:hover {
+        cursor: pointer;
+        color: white;
+      }
+    }
+  }
+
+  &_cancel {
+    flex-basis: 38%;
+    margin-right: auto;
+    border-color: $blue_dark;
+    color: $blue_dark;
+    &:hover {
+      background-color: $blue_dark;
+    }
+  }
+
+  &_submit {
+    flex-basis: 58%;
+    margin-left: auto;
+    border-color: $pink_dark;
+    color: $pink_dark;
+    &:hover {
+      background-color: $pink_dark;
+    }
+  }
+
+  &_txt {
+    margin-top: 30px;
+  }
+}
+
+@import './home', './login', './signup'; // styles for pages
+@import './header', './footer'; // styles for components

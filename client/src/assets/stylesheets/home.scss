@@ -1,0 +1,27 @@
+
+.home {
+  &_header {
+    font-size: 48px;
+  }
+
+  &_sub_header {
+    font-size: 26px;
+    margin: 10px 0;
+  }
+
+  &_button {
+
+  }
+
+  &_section {
+    padding: 80px 0;
+
+    &:first-child {
+      display: flex;
+      flex-direction: column;
+
+    }
+  }
+
+}
+

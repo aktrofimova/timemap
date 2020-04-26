@@ -73,18 +73,13 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Log In</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <TextField required variant="outlined" type="email" id="email" label="E-Mail" onChange={this.handleChange}/>
-          </div>
+      <div className="login">
+        <h1 className="header login_header">Log In</h1>
+        <form className="form login_form" onSubmit={this.handleSubmit}>
+            <TextField className="form_input" required variant="outlined" type="email" id="email" label="E-Mail" onChange={this.handleChange}/>
 
-          <div>
-            <FormControl required variant="outlined">
-              <InputLabel htmlFor="password">
-                Password
-              </InputLabel>
+            <FormControl className="form_input" required variant="outlined" >
+              <InputLabel htmlFor="password">Password</InputLabel>
               <OutlinedInput
                 id="password"
                 type={this.state.showPassword ? "text" : "password"}
@@ -105,13 +100,15 @@ class Login extends Component {
                 labelWidth={85}
               />
             </FormControl>
-          </div>
 
-          <div>
-            <Button variant="outlined" color="secondary">Go to presentation</Button>
-            <Button variant="outlined" color="primary" type="submit">Log In</Button>
-            <Button variant="outlined" color="default"><Link to='/signup'>Sign up</Link></Button>
+
+          <div className="form_block form_buttons">
+            {/*<Button className="login_back" variant="outlined">Back</Button>*/}
+            {/*<Button className="login_submit" variant="outlined" type="submit">Log In</Button>*/}
+            <button onClick={() => window.history.back()} className="form_cancel">Back</button>
+            <button className="form_submit" type="submit">Log In</button>
           </div>
+          <p className="form_txt">Do not have an account? <Link className="cta_link" to='/signup'>Sign up</Link></p>
 
         </form>
         <div>{this.state.errors ? this.handleErrors() : null}</div>

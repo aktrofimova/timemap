@@ -53,7 +53,7 @@ class App extends Component {
 
         <Header loggedInStatus={this.state.isLoggedIn} currentUser={this.state.user} handleLogout={this.handleLogout}/>
 
-        <main style={{marginTop: "94px"}}>
+        <main className="main">
           {/* with exact the order doesn't matter, w/o exact it does */}
           {/* Switch + order is alternative to exact */}
           <Switch>
@@ -68,7 +68,9 @@ class App extends Component {
 
             <Route path="/users" component={TestUsers}></Route>
 
-            <Route path="/" component={Home}></Route>
+            <Route path="/" render={props => (
+              <Home {...props} loggedInStatus={this.state.isLoggedIn}/>
+            )} />
 
           </Switch>
         </main>

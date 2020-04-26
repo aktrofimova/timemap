@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios'
 import {
   Button,
@@ -24,18 +25,18 @@ const projects = [
   }
 ];
 
-const positions = [
+const roles = [
   {
-    value: "dev",
-    label: "Developer"
+    value: "employee",
+    label: "Employee"
   },
   {
-    value: "qa",
-    label: "Quality Assurance"
+    value: "manager",
+    label: "Manager"
   },
   {
-    value: "pm",
-    label: "Project Manager"
+    value: "client",
+    label: "Client"
   }
 ];
 
@@ -46,7 +47,7 @@ class Signup extends Component {
     email: '',
     password: '',
     project: '',
-    position: '',
+    role: '',
 
     passwordConfirmation: '',
     errors: ''
@@ -67,8 +68,8 @@ class Signup extends Component {
     this.setState({project: event.target.value})
   };
 
-  handlePositionChange = event => {
-    this.setState({position: event.target.value})
+  handleRoleChange = event => {
+    this.setState({role: event.target.value})
   };
 
   handleSubmit = (event) => {
@@ -112,54 +113,17 @@ class Signup extends Component {
   };
 
   render() {
-    const customSelect = {
-      width: '204px',
-      textAlign: 'left'
-    };
     return (
-      <div>
-        <h1>Sign Up</h1>
-        <form autoComplete="off" onSubmit={this.handleSubmit}>
-          <div>
-            <TextField required variant="outlined" id="firstName" label="First Name" onChange={this.handleChange}/>
-            <TextField required variant="outlined" id="lastName" label="Last Name" onChange={this.handleChange}/>
+      <div className="signup">
+        <h1 className="header signup_header">Sign Up</h1>
+        <form className="form signup_form" autoComplete="off" onSubmit={this.handleSubmit}>
+          <div className="form_block">
+            <TextField className="form_input" required variant="outlined" id="name" label="Name" onChange={this.handleChange}/>
+            <TextField className="form_input" required variant="outlined" type="email" id="email" label="E-Mail" onChange={this.handleChange}/>
           </div>
 
-          <div>
-            <div>
-              <TextField select id="selectProject" style={customSelect}
-                         label="Select Project"
-                         value={this.state.project}
-                         onChange={this.handleProjectChange}
-                         variant="outlined">
-                {projects.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-
-              <TextField select id="selectPosition" style={customSelect}
-                         label="Select Position"
-                         value={this.state.position}
-                         onChange={this.handlePositionChange}
-                         variant="outlined"
-              >
-                {positions.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </div>
-          </div>
-
-          <div>
-            <TextField required variant="outlined" type="email" id="email" label="E-Mail" onChange={this.handleChange}/>
-          </div>
-
-          <div>
-            <FormControl required variant="outlined">
+          <div className="form_block">
+            <FormControl className="form_input" required variant="outlined">
               <InputLabel htmlFor="password">Password</InputLabel>
               <OutlinedInput
                 id="password"
@@ -170,7 +134,7 @@ class Signup extends Component {
               />
             </FormControl>
 
-            <FormControl required variant="outlined">
+            <FormControl className="form_input" required variant="outlined">
               <InputLabel htmlFor="passwordConfirmation">Confirm Password</InputLabel>
               <OutlinedInput
                 id="passwordConfirmation"
@@ -182,14 +146,42 @@ class Signup extends Component {
             </FormControl>
           </div>
 
-          <div>
+          <div className="form_block">
+              <TextField className="form_input"
+                         select id="selectProject"
+                         label="Select Project"
+                         value={this.state.project}
+                         onChange={this.handleProjectChange}
+                         variant="outlined">
+                {projects.map(option => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
 
+            <TextField className="form_input" variant="outlined" id="position" label="Position" onChange={this.handleChange}/>
           </div>
 
-          <div>
-            <Button variant="outlined" color="secondary">Cancel</Button>
-            <Button variant="outlined" color="primary" type="submit">Sign Up</Button>
+          <TextField className="form_input single"
+                     select id="selectRole"
+                     label="Select Role"
+                     value={this.state.role}
+                     onChange={this.handleRoleChange}
+                     variant="outlined"
+          >
+            {roles.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          <div className="form_block form_buttons">
+            <button onClick={() => window.history.back()} className="form_cancel">Cancel</button>
+            <button className="form_submit" type="submit">Sign Up</button>
           </div>
+          <p className="form_txt">Already have an account? <Link className="cta_link" to='/login'>Log In</Link></p>
 
 
         </form>
