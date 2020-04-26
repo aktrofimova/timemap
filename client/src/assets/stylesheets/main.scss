@@ -1,8 +1,5 @@
-@import './colors';
+@import './colors', './footer';
 
-.appp_bar {
-  //color: $blue_dark !important;
-  //background-color: white !important;
-  //color: $blue_dark;
-  //background-color: white;
+.App {
+  color: $blue_dark;
 }

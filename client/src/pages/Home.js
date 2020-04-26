@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles} from "@material-ui/core/styles";
+import Footer from "../components/Footer";
 
 
 const Home = (props) => {
@@ -29,7 +30,7 @@ const Home = (props) => {
         <p style={{marginBottom: '500px'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eaque expedita facilis fugiat impedit in laboriosam magnam modi, nemo nostrum odit omnis placeat porro repellat repudiandae sunt tenetur unde veniam.</p>
       </section>
 
-
+      <Footer />
 
     </div>)
 };

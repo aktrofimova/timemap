@@ -6,9 +6,9 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import TestUsers from './components/TestUsers';
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 
 import './App.css';
+import './assets/stylesheets/main.scss'
 
 class App extends Component {
   state = {
@@ -73,7 +73,6 @@ class App extends Component {
           </Switch>
         </main>
 
-        <Footer />
 
       </div>
     );
