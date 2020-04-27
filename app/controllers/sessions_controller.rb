@@ -18,7 +18,9 @@ class SessionsController < ApplicationController
 
   def is_logged_in?
     if logged_in? && current_user
-      render json: {logged_in: true, user: current_user.base_hash}
+      render json: {logged_in: true,
+                    user: current_user.base_hash
+                            .merge!(:project => {:id => current_user.project&.id, :display_name => current_user.project&.display_name})}
     else
       render json: {logged_in: false, message: 'no user logged in'}
     end

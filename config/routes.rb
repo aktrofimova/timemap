@@ -24,8 +24,9 @@ Rails.application.routes.draw do
 
 
   # Routes on front-end
-  # / - presentation (root path)
+  # / - home page
   # /signup - show a form to create(edit) a user
   # /login - show a form to login a user
+  # /profile - show user's profile
 
 end

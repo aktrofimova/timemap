@@ -10,7 +10,7 @@ class Api::UsersController < ApplicationController
     if @users
       users_hash = @users.map do |user|
         user.base_hash
-          .merge!(:project => user.project&.display_name)
+          .merge!(:project => {:id => user.project&.id, :display_name => user.project&.display_name})
       end
       render json: {users: users_hash}
     else
@@ -22,7 +22,7 @@ class Api::UsersController < ApplicationController
   def show
     if @user
       render json: {user: @user.base_hash
-                            .merge!(:project => @user.project&.display_name)}
+                            .merge!(:project => {:id => @user.project&.id, :display_name => @user.project&.display_name})}
     else
       render json: {status: 404, message: 'user not found'}
     end

@@ -13,6 +13,8 @@ class Login extends Component {
     errors: ''
   };
 
+
+
   componentDidMount() {
     // TM-18: why it doesn't work???
     return this.props.loggedInStatus ? this.redirect() : null
@@ -47,7 +49,7 @@ class Login extends Component {
       .then(response => {
         if (response.data.logged_in) {
           this.props.handleLogin(response);
-          this.redirect();
+          this.redirect('/profile');
         } else {
           this.setState({errors: response.data.errors});
         }
@@ -55,8 +57,8 @@ class Login extends Component {
       .catch(error => console.log('api errors:', error))
   };
 
-  redirect = () => {
-    this.props.history.push('/')
+  redirect = (path) => {
+    this.props.history.push(path)
   }
 
   handleErrors = () => {
@@ -73,7 +75,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login">
+      <div className="login page">
         <h1 className="header login_header">Log In</h1>
         <form className="form login_form" onSubmit={this.handleSubmit}>
             <TextField className="form_input" required variant="outlined" type="email" id="email" label="E-Mail" onChange={this.handleChange}/>
@@ -108,7 +110,7 @@ class Login extends Component {
             <button onClick={() => window.history.back()} className="form_cancel">Back</button>
             <button className="form_submit" type="submit">Log In</button>
           </div>
-          <p className="form_txt">Do not have an account? <Link className="cta_link" to='/signup'>Sign up</Link></p>
+          <p className="form_txt">Do not have an account? <Link className="cta_link primary" to='/signup'>Sign up</Link></p>
 
         </form>
         <div>{this.state.errors ? this.handleErrors() : null}</div>

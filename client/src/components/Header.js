@@ -58,7 +58,8 @@ const Header = (props) => {
   }
 
     const menuItems = props.loggedInStatus ? [
-        <MenuItem key="profile" onClick={handleProfileMenuClose}><Link to="/">Profile</Link></MenuItem>,
+        <MenuItem key="profile" onClick={handleProfileMenuClose}><Link to="/profile">Profile</Link></MenuItem>,
+        <MenuItem key="project" onClick={handleProfileMenuClose}><Link to="/">Project</Link></MenuItem>,
       <MenuItem key="logout" onClick={handleLogout}><Link to="/">Log out</Link></MenuItem>
     ] :
     [

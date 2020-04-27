@@ -1,0 +1,22 @@
+
+.profile {
+  width: 80%;
+  box-shadow: 0px -1px 8px -1px rgba(0, 0, 0, 0.2);
+
+  &_content {
+    display: flex;
+  }
+
+  &_left {
+    flex-basis: 30%;
+  }
+
+  &_right {
+    flex-basis: 70%;
+  }
+
+  &_button {
+    font-size: 14px;
+    border-width: 1px;
+  }
+}

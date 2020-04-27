@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Profile from "./pages/Profile";
 import TestUsers from './components/TestUsers';
 import Header from "./components/Header";
 
@@ -18,7 +19,18 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.loginStatus()
+    // setTimeout(() => {
+      axios.get('http://localhost:3001/logged_in',
+        {withCredentials: true}) // This allows our Rails server to set and read the cookie on the front-end’s browser. ALWAYS pass this argument!
+        .then(response => {
+          if (response.data.logged_in) {
+            this.handleLogin(response);
+          } else {
+            this.handleLogout();
+          }
+        })
+        .catch(error => console.log('api errors:', error))
+    // }, 1000)
   }
 
   handleLogin = (event) => {
@@ -32,19 +44,6 @@ class App extends Component {
       isLoggedIn: false,
       user: {}
     })
-  }
-
-  loginStatus = () => {
-    axios.get('http://localhost:3001/logged_in',
-      {withCredentials: true}) // This allows our Rails server to set and read the cookie on the front-end’s browser. ALWAYS pass this argument!
-      .then(response => {
-        if (response.data.logged_in) {
-          this.handleLogin(response);
-        } else {
-          this.handleLogout();
-        }
-      })
-      .catch(error => console.log('api errors:', error))
   }
 
   render() {
@@ -67,6 +66,13 @@ class App extends Component {
             )} />
 
             <Route path="/users" component={TestUsers}></Route>
+
+            <Route path="/profile" render={props => (
+              <Profile {...props} user={this.state.user} loggedInStatus={this.state.isLoggedIn}/>
+            )} />
+
+            {/*<Route path="/profile" component={Profile}></Route>*/}
+
 
             <Route path="/" render={props => (
               <Home {...props} loggedInStatus={this.state.isLoggedIn}/>

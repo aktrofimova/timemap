@@ -54,6 +54,7 @@ class Signup extends Component {
   };
 
   componentDidMount() {
+    // TM-18: why it doesn't work???
     return this.props.loggedInStatus ? this.redirect() : null
   }
 
@@ -86,7 +87,7 @@ class Signup extends Component {
       .then(response => {
         if (response.data.status === 'created') {
           this.props.handleLogin(response.data)
-          this.redirect()
+          this.redirect('/profile');
         } else {
           this.setState({
             errors: response.data.errors
@@ -96,8 +97,8 @@ class Signup extends Component {
       .catch(error => console.log('api errors:', error))
   };
 
-  redirect = () => {
-    this.props.history.push('/')
+  redirect = (path) => {
+    this.props.history.push(path)
   }
 
   handleErrors = () => {
@@ -114,7 +115,7 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className="signup">
+      <div className="signup page">
         <h1 className="header signup_header">Sign Up</h1>
         <form className="form signup_form" autoComplete="off" onSubmit={this.handleSubmit}>
           <div className="form_block">
@@ -181,7 +182,7 @@ class Signup extends Component {
             <button onClick={() => window.history.back()} className="form_cancel">Cancel</button>
             <button className="form_submit" type="submit">Sign Up</button>
           </div>
-          <p className="form_txt">Already have an account? <Link className="cta_link" to='/login'>Log In</Link></p>
+          <p className="form_txt">Already have an account? <Link className="cta_link primary" to='/login'>Log In</Link></p>
 
 
         </form>
