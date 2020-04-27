@@ -14,7 +14,8 @@ class Profile extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      axios.get('http://localhost:3001/api/users/' + this.props.user.id,
+      let id = this.props.match.params.id;
+      axios.get('http://localhost:3001/api/users/' + id,
         {withCredentials: true}) // This allows our Rails server to set and read the cookie on the front-end’s browser. ALWAYS pass this argument!
         .then(response => {
           this.setState({user: response.data.user});
@@ -26,7 +27,6 @@ class Profile extends Component {
   render() {
     let user = this.state.user;
     let email = user.email;
-    let mailto = "mailto: " + email;
 
     return (
       <div className="profile page">
@@ -41,8 +41,8 @@ class Profile extends Component {
 
           <div className="profile_right">
             <p className="profile_name">{user.name}</p>
-            <p><Link className="cta_link primary" to={mailto}>{email}</Link></p>
-            {user.project ? <p><Link className="cta_link secondary" to="/project">{user.project.display_name}</Link></p> : null}
+            <p><Link className="cta_link primary" to={"mailto: " + email}>{email}</Link></p>
+            {user.project ? <p><Link className="cta_link secondary" to={"/project/" + user.project.id}>{user.project.display_name}</Link></p> : null}
             {user.position ? <p>{user.position}</p> : null}
 
             <div>

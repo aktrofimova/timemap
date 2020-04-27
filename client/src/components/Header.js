@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { makeStyles} from "@material-ui/core/styles";
@@ -37,6 +37,8 @@ const Header = (props) => {
   const isMenuOpen = Boolean(anchorEl);
   const menuId = 'profile-menu';
 
+
+
   const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -57,9 +59,11 @@ const Header = (props) => {
       .catch(error => console.log(error))
   }
 
-    const menuItems = props.loggedInStatus ? [
-        <MenuItem key="profile" onClick={handleProfileMenuClose}><Link to="/profile">Profile</Link></MenuItem>,
-        <MenuItem key="project" onClick={handleProfileMenuClose}><Link to="/project">Project</Link></MenuItem>,
+  // const currentUser = props.currentUser;
+  // const project = currentUser.project.id;
+  const menuItems = props.loggedInStatus ? [
+      <MenuItem key="profile" onClick={handleProfileMenuClose}><Link to={"/profile/" + props.currentUser.id}>Profile</Link></MenuItem>,
+      <MenuItem key="project" onClick={handleProfileMenuClose}><Link to={"/project/" + props.currentUser.project.id}>Project</Link></MenuItem>,
       <MenuItem key="logout" onClick={handleLogout}><Link to="/">Log out</Link></MenuItem>
     ] :
     [
@@ -67,7 +71,6 @@ const Header = (props) => {
       <MenuItem key="signup" onClick={handleProfileMenuClose}><Link to="/signup">Sign Up</Link></MenuItem>
     ]
 
-  // console.log(props);
 
   return (
     <AppBar position="fixed" className={classes.app_bar}>

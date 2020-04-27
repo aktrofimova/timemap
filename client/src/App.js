@@ -70,12 +70,12 @@ class App extends Component {
 
             <Route path="/users" component={TestUsers}></Route>
 
-            <Route path="/profile" render={props => (
-              <Profile {...props} user={this.state.user} loggedInStatus={this.state.isLoggedIn}/>
+            <Route exact path="/profile/:id" render={props => (
+              <Profile {...props} loggedInStatus={this.state.isLoggedIn}/>
             )} />
 
-            <Route path="/project" render={props => (
-              <Project {...props} project={this.state.project} loggedInStatus={this.state.isLoggedIn}/>
+            <Route exact path="/project/:id" render={props => (
+              <Project {...props} loggedInStatus={this.state.isLoggedIn}/>
             )} />
 
             <Route path="/" render={props => (
