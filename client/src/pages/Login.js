@@ -49,7 +49,8 @@ class Login extends Component {
       .then(response => {
         if (response.data.logged_in) {
           this.props.handleLogin(response);
-          this.redirect('/profile');
+          // TODO add id
+          this.redirect('/profile' + response.data.user.id);
         } else {
           this.setState({errors: response.data.errors});
         }
@@ -75,7 +76,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login page">
+      <div className="login framed_page">
         <h1 className="header login_header">Log In</h1>
         <form className="form login_form" onSubmit={this.handleSubmit}>
             <TextField className="form_input" required variant="outlined" type="email" id="email" label="E-Mail" onChange={this.handleChange}/>

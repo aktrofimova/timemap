@@ -1,9 +1,10 @@
 import React, { useState, useEffect }  from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { makeStyles} from "@material-ui/core/styles";
 import Aux from '../hoc/Aux';
 import Logo from '../components/Logo';
+import Home from '../pages/Home';
 import { AppBar, Toolbar, IconButton, Menu, MenuItem }from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import logo from "../logo-coloured.svg";
@@ -53,8 +54,7 @@ const Header = (props) => {
       .then(response => {
         props.handleLogout();
         // TM-27
-        props.history.push('/');
-        // return (<Redirect to = {HomeURL} />);
+        return (<Redirect to="/" />);
       })
       .catch(error => console.log(error))
   }
@@ -80,8 +80,8 @@ const Header = (props) => {
 
           {props.loggedInStatus ?
             <Aux>
-              <p className="tool_bar_item">Timesheet</p>
-              <p className="tool_bar_item">Other button</p>
+              <Link to={"/profile/" + props.currentUser.id + "/timesheet"} className="tool_bar_item tool_bar_link">Timesheet</Link>
+              <Link to={"/profile/" + props.currentUser.id + "/timeoffs"} className="tool_bar_item tool_bar_link">Time Offs</Link>
             </Aux> :
             <Link to="/" className="tool_bar_item">TimeMap</Link>
           }
@@ -89,32 +89,40 @@ const Header = (props) => {
 
         <div className="tool_bar_right">
           {props.loggedInStatus ?
-            <p className="tool_bar_item name">{props.currentUser.name}</p> : null}
+            <Aux>
+              <p className="tool_bar_item name">{props.currentUser.name}</p>
 
-          <IconButton
-            className="tool_bar_item account"
-            edge="end"
-            aria-label="profile menu"
-            aria-controls={menuId}
-            aria-haspopup="true"
-            onClick={handleProfileMenuOpen}
-            color="inherit"
-          >
-            <AccountCircle style={{ fontSize: 28 }}/>
-          </IconButton>
+              <IconButton
+                className="tool_bar_item account"
+                edge="end"
+                aria-label="profile menu"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle style={{ fontSize: 28 }}/>
+              </IconButton>
 
-          <Menu
-            className={classes.menu}
-            anchorEl={anchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-            open={isMenuOpen}
-            onClose={handleProfileMenuClose}
-          >
-            {menuItems.map(item => item)}
-          </Menu>
+              <Menu
+                className={classes.menu}
+                anchorEl={anchorEl}
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                id={menuId}
+                keepMounted
+                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                open={isMenuOpen}
+                onClose={handleProfileMenuClose}
+              >
+                {menuItems.map(item => item)}
+              </Menu>
+            </Aux> :
+
+            <Aux>
+              <Link to="/login" className="tool_bar_item tool_bar_link">Log In</Link>
+              <Link to="/signup" className="tool_bar_item tool_bar_link">Sign Up</Link>
+            </Aux>
+          }
         </div>
       </Toolbar>
     </AppBar>

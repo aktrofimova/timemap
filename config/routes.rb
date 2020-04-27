@@ -7,9 +7,8 @@ Rails.application.routes.draw do
     get 'users/:id/tasks', to: 'users#user_tasks'
     get 'users/:id/timeoffs', to: 'users#user_timeoffs'
     resources :projects
-    # resources :members
     resources :tasks
-    # resources :timeoffs
+    resources :timeoffs
 
     # GET localhost:3001/api
     root to: 'users#index'
@@ -27,6 +26,9 @@ Rails.application.routes.draw do
   # / - home page
   # /signup - show a form to create(edit) a user
   # /login - show a form to login a user
-  # /profile - show user's profile
+  # /profile/:id - show user's profile
+  # /project/:id - show project's profile
+  # /profile/:id/timesheet - show user's tasks
+  # /profile/:id/timeoffs - show user's time offs
 
 end

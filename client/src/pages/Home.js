@@ -8,7 +8,7 @@ const Home = (props) => {
   const classes = useStyles();
 
   let linkLabel = props.loggedInStatus ? 'Go To Timesheet' : 'Start Tracking Your Time';
-  let path = props.loggedInStatus ? '/timesheet' : '/login';
+  let path = props.loggedInStatus ? '/profile/:id/timesheet' : '/login';
 
   return (
     <div className={classes.home}>

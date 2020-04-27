@@ -14,6 +14,23 @@
     }
   }
 
+  &_link {
+    @include transition(.4);
+    box-sizing: border-box;
+    background-color: white;
+    border: none;
+    border-bottom: 1px solid transparent;
+    //border: 1px solid $blue_dark;
+    margin: 0 0 0 30px;
+    padding: 10px 3px 5px;
+
+
+    &:hover {
+      cursor: pointer;
+      border-color: $blue_dark;
+    }
+  }
+
   &_left {
     display: flex;
     align-items: center;

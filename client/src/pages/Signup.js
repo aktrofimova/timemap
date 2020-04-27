@@ -87,7 +87,8 @@ class Signup extends Component {
       .then(response => {
         if (response.data.status === 'created') {
           this.props.handleLogin(response.data)
-          this.redirect('/profile');
+          // TODO add id
+          this.redirect('/profile' + response.data.user.id);
         } else {
           this.setState({
             errors: response.data.errors
@@ -115,7 +116,7 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className="signup page">
+      <div className="signup framed_page">
         <h1 className="header signup_header">Sign Up</h1>
         <form className="form signup_form" autoComplete="off" onSubmit={this.handleSubmit}>
           <div className="form_block">

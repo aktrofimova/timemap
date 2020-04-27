@@ -29,7 +29,7 @@ class Profile extends Component {
     let email = user.email;
 
     return (
-      <div className="profile page">
+      <div className="profile framed_page">
         <h1 className="header profile_header">Profile</h1>
 
         <div className="profile_content">
@@ -46,8 +46,8 @@ class Profile extends Component {
             {user.position ? <p>{user.position}</p> : null}
 
             <div>
-              <Link className="cta_link secondary" to="/timesheet">Timesheet</Link>
-              <Link className="cta_link secondary" to="/timeoffs">Time Offs</Link>
+              <Link className="cta_link secondary" to={"/profile/" + user.id + "/timesheet"}>Timesheet</Link>
+              <Link className="cta_link secondary" to={"/profile/" + user.id + "/timeoffs"}>Time Offs</Link>
             </div>
           </div>
         </div>

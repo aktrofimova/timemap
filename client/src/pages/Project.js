@@ -29,7 +29,7 @@ class Project extends Component {
 
   render() {
     return (
-      <div className="project">
+      <div className="project page">
         <h1 className="header project_header">{this.state.project.display_name}</h1>
         <p>{this.state.project.details}</p>
 
