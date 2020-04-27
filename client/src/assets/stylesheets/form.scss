@@ -21,7 +21,7 @@
 
   &_buttons {
     button {
-      @include transition;
+      @include transition(.3);
       background-color: white;
       border: 1px solid;
       border-radius: 5px;

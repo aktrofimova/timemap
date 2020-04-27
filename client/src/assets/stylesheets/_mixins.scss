@@ -1,7 +1,7 @@
-@mixin transition {
-  transition: all .3s ease;
+@mixin transition($sec) {
+  transition: all #{$sec}s ease;
   &:hover {
-    transition: all .3s ease;
+    transition: all #{$sec}s ease;
   }
 }
 

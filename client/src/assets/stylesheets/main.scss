@@ -19,7 +19,7 @@
 }
 
 .cta_btn {
-  @include transition;
+  @include transition(.3);
   font-size: 18px;
   border: 2px solid;
   border-radius: 5px;
@@ -64,4 +64,4 @@
 
 
 @import './home', './login', './signup', './profile'; // styles for pages
-@import './header', './footer', './form'; // styles for components
+@import './header', './footer', './form', 'project'; // styles for components

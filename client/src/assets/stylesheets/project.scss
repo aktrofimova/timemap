@@ -1,0 +1,46 @@
+
+.project {
+  margin-top: 70px;
+
+  &_users {
+    width: 50%;
+    margin: auto;
+  }
+
+  &_members {
+    margin-top: 50px;
+    text-align: left;
+  }
+}
+
+.user_card {
+  @include transition(.3);
+  position: relative;
+  text-decoration: none;
+  color: $blue_dark;
+  //width: 50%;
+  box-shadow: $box_shadow;
+  display: flex;
+  align-items: center;
+  margin: 25px auto;
+  bottom: 0;
+  right: 0;
+
+  &:hover {
+    bottom: 5px;
+    right: 5px;
+  }
+
+  &_left {
+    flex-basis: 50%;
+  }
+
+  &_right {
+    flex-basis: 50%;
+    text-align: left;
+  }
+
+  &_name {
+    font-weight: bold;
+  }
+}

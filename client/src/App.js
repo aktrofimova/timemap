@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from "./pages/Profile";
+import Project from "./pages/Project";
 import TestUsers from './components/TestUsers';
 import Header from "./components/Header";
 
@@ -15,7 +16,7 @@ class App extends Component {
   state = {
     isLoggedIn: false,
     user: {},
-    snackMessage: ""
+    project: {}
   };
 
   componentDidMount() {
@@ -36,13 +37,15 @@ class App extends Component {
   handleLogin = (event) => {
     this.setState({
       isLoggedIn: true,
-      user: event.data.user
+      user: event.data.user,
+      project: event.data.user.project
     })
   }
   handleLogout = () => {
     this.setState({
       isLoggedIn: false,
-      user: {}
+      user: {},
+      project: {}
     })
   }
 
@@ -71,8 +74,9 @@ class App extends Component {
               <Profile {...props} user={this.state.user} loggedInStatus={this.state.isLoggedIn}/>
             )} />
 
-            {/*<Route path="/profile" component={Profile}></Route>*/}
-
+            <Route path="/project" render={props => (
+              <Project {...props} project={this.state.project} loggedInStatus={this.state.isLoggedIn}/>
+            )} />
 
             <Route path="/" render={props => (
               <Home {...props} loggedInStatus={this.state.isLoggedIn}/>
