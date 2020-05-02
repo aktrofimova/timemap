@@ -63,7 +63,6 @@ const Header = (props) => {
   // const project = currentUser.project.id;
   const menuItems = props.loggedInStatus ? [
       <MenuItem key="profile" onClick={handleProfileMenuClose}><Link to={"/profile/" + props.currentUser.id}>Profile</Link></MenuItem>,
-      <MenuItem key="project" onClick={handleProfileMenuClose}><Link to={"/project/" + props.currentUser.project.id}>Project</Link></MenuItem>,
       <MenuItem key="logout" onClick={handleLogout}><Link to="/">Log out</Link></MenuItem>
     ] :
     [
@@ -80,7 +79,7 @@ const Header = (props) => {
 
           {props.loggedInStatus ?
             <Aux>
-              <Link to={"/profile/" + props.currentUser.id + "/timesheet"} className="tool_bar_item tool_bar_link">Timesheet</Link>
+              <Link to={"/profile/" + props.currentUser.id + "/tasks"} className="tool_bar_item tool_bar_link">Task Tracker</Link>
               <Link to={"/profile/" + props.currentUser.id + "/timeoffs"} className="tool_bar_item tool_bar_link">Time Offs</Link>
             </Aux> :
             <Link to="/" className="tool_bar_item">TimeMap</Link>

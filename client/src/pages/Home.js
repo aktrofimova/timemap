@@ -7,8 +7,8 @@ import Footer from "../components/Footer";
 const Home = (props) => {
   const classes = useStyles();
 
-  let linkLabel = props.loggedInStatus ? 'Go To Timesheet' : 'Start Tracking Your Time';
-  let path = props.loggedInStatus ? '/profile/:id/timesheet' : '/login';
+  let linkLabel = props.loggedInStatus ? 'Go To Task Tracker' : 'Start Tracking Your Time';
+  let path = props.loggedInStatus ? '/profile/:id/tasks' : '/login';
 
   return (
     <div className={classes.home}>
@@ -24,16 +24,16 @@ const Home = (props) => {
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eaque expedita facilis fugiat impedit in laboriosam magnam modi, nemo nostrum odit omnis placeat porro repellat repudiandae sunt tenetur unde veniam.</p>
       </section>
 
-
       <section className="home_section">
-        <h4>Some possibilities of the platform</h4>
+        <h4>Some features</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eaque expedita facilis fugiat impedit in laboriosam magnam modi, nemo nostrum odit omnis placeat porro repellat repudiandae sunt tenetur unde veniam.</p>
       </section>
 
       <section className="home_section">
-        <h4>Sth else</h4>
+        <h4>Technologies used</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eaque expedita facilis fugiat impedit in laboriosam magnam modi, nemo nostrum odit omnis placeat porro repellat repudiandae sunt tenetur unde veniam.</p>
       </section>
+
 
       <Footer />
 

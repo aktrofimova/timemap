@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   # /login - show a form to login a user
   # /profile/:id - show user's profile
   # /project/:id - show project's profile
-  # /profile/:id/timesheet - show user's tasks
+  # /profile/:id/tasks - show user's tasks
   # /profile/:id/timeoffs - show user's time offs
 
 end

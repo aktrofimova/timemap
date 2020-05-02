@@ -46,7 +46,7 @@ class Profile extends Component {
             {user.position ? <p>{user.position}</p> : null}
 
             <div>
-              <Link className="cta_link secondary" to={"/profile/" + user.id + "/timesheet"}>Timesheet</Link>
+              <Link className="cta_link secondary" to={"/profile/" + user.id + "/tasks"}>Task Tracker</Link>
               <Link className="cta_link secondary" to={"/profile/" + user.id + "/timeoffs"}>Time Offs</Link>
             </div>
           </div>

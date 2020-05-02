@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import NewTask from '../components/NewTask';
 import TaskCard from '../components/TaskCard';
 
-class Timesheet extends Component {
+
+class TaskTracker extends Component {
   state = {
     user: {
       name: "John Doe",
@@ -17,7 +18,7 @@ class Timesheet extends Component {
   render() {
     return (
       <div className="tasks page">
-        <h1 className="header tasks_header">Timesheet: {this.state.user.name}</h1>
+        <h1 className="header tasks_header">Task Tracker: {this.state.user.name}</h1>
 
         <NewTask className="tasks_new"/>
         <p></p>
@@ -29,4 +30,4 @@ class Timesheet extends Component {
   }
 }
 
-export default Timesheet;
+export default TaskTracker;

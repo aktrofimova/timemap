@@ -6,7 +6,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from "./pages/Profile";
 import Project from "./pages/Project";
-import Timesheet from "./pages/Timesheet";
+import TaskTracker from "./pages/TaskTracker";
 import Timeoffs from "./pages/Timeoffs";
 import TestUsers from './components/TestUsers';
 import Header from "./components/Header";
@@ -78,8 +78,8 @@ class App extends Component {
               <Project {...props} loggedInStatus={this.state.isLoggedIn}/>
             )} />
 
-            <Route exact path="/profile/:id/timesheet" render={props => (
-              <Timesheet {...props} loggedInStatus={this.state.isLoggedIn}/>
+            <Route exact path="/profile/:id/tasks" render={props => (
+              <TaskTracker {...props} loggedInStatus={this.state.isLoggedIn}/>
             )} />
 
             <Route exact path="/profile/:id/timeoffs" render={props => (
