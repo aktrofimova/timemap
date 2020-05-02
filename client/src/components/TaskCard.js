@@ -18,19 +18,25 @@ class TaskCard extends Component {
   }
 
   render() {
+    var displayTimeRange = this.props.task.started_at && this.props.task.ended_at;
+
+
     return (
-      <div className="task_carr">
-        <div className="task_card_up">
-          <p>today | Thu, 30th Apr</p>
-          <p>Total time: <span>00:45</span></p>
+      <div className="task">
+        <div className="task_up">
+          <p>{this.props.task.date}</p>
+          <p><span style={{fontSize: '14px'}}>Total time:</span> <span>00:00</span></p>
         </div>
-        <div className="task_card_down">
-          <p>{this.state.task.name}</p>
-          <p>{this.state.task.details}</p>
-          <p><span>{this.state.task.started_at}</span> - <span>{this.state.task.ended_at}</span></p>
-          <p><span>{this.state.task.started_at}</span> - <span>{this.state.task.ended_at}</span></p>
-          <p>{this.state.task.date}</p>
-          <p>{this.state.task.hours}</p>
+        <div className="task_down">
+          <p className="task_name task_item">{this.props.task.project + ': ' + this.props.task.display_name}</p>
+          <p className="task_details task_item">{this.props.task.details}</p>
+
+          <div className="task_right">
+            {displayTimeRange ? <p className="task_time task_item"><span>{this.props.task.started_at}</span> - <span>{this.props.task.ended_at}</span></p> : null}
+            {/*<p className="task_">{this.props.task.date}</p>*/}
+            <p className="task_hours task_item">{this.props.task.hours}</p>
+          </div>
+
         </div>
       </div>
     );

@@ -21,7 +21,7 @@ class Profile extends Component {
           this.setState({user: response.data.user});
         })
         .catch(error => console.log('api errors:', error))
-    }, 1000)
+    }, 500)
   }
 
   render() {

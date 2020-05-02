@@ -69,7 +69,7 @@ class NewTask extends Component {
   render() {
     return (
       <div className="new_task">
-        <TextField className=""
+        <TextField className="new_task_field new_task_select"
                    select id="selectTask"
                    label="Select Task"
                    // value={this.state.task}
@@ -81,12 +81,14 @@ class NewTask extends Component {
           ))}
         </TextField>
 
-        <TextField id="details" className="" label="Details" onChange={this.handleChange}/>
+        <TextField id="details" className="new_task_field new_task_details" label="Details" onChange={this.handleChange}/>
 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
 
           <KeyboardTimePicker
             id="startedAt"
+            className="new_task_field new_task_time"
+            // style={{maxWidth: '250px'}}
             label="Started At"
             // placeholder={this.state.started_at}
             onChange={this.handleStartTimeChange}
@@ -94,12 +96,14 @@ class NewTask extends Component {
 
           <KeyboardTimePicker
             id="endedAt"
+            className="new_task_field new_task_time"
             label="Ended At"
             // placeholder={this.state.started_at}
             onChange={this.handleEndTimeChange}
           />
 
           <KeyboardDatePicker
+            className="new_task_field new_task_date"
             disableToolbar
             variant="inline"
             format="MMM dd, yyyy"
@@ -111,7 +115,7 @@ class NewTask extends Component {
 
         </MuiPickersUtilsProvider>
 
-        <TextField id="hours" className="" label="Hours" defaultValue="05:15" onChange={this.handleChange}/>
+        <TextField id="hours" className="new_task_field new_task_hours" label="Hours" defaultValue="05:15" onChange={this.handleChange}/>
 
         <Button variant="outlined">Add Task</Button>
 

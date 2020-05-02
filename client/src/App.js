@@ -79,7 +79,7 @@ class App extends Component {
             )} />
 
             <Route exact path="/profile/:id/tasks" render={props => (
-              <TaskTracker {...props} loggedInStatus={this.state.isLoggedIn}/>
+              <TaskTracker {...props} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.user}/>
             )} />
 
             <Route exact path="/profile/:id/timeoffs" render={props => (
@@ -89,7 +89,7 @@ class App extends Component {
             <Route path="/users" component={TestUsers}></Route>
 
             <Route path="/" render={props => (
-              <Home {...props} loggedInStatus={this.state.isLoggedIn}/>
+              <Home {...props} loggedInStatus={this.state.isLoggedIn} currentUserId={this.state.user.id}/>
             )} />
 
           </Switch>

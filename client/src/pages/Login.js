@@ -50,7 +50,7 @@ class Login extends Component {
         if (response.data.logged_in) {
           this.props.handleLogin(response);
           // TODO add id
-          this.redirect('/profile' + response.data.user.id);
+          this.redirect('/profile/' + response.data.user.id);
         } else {
           this.setState({errors: response.data.errors});
         }
