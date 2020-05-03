@@ -61,6 +61,27 @@ class Api::UsersController < ApplicationController
       tasks = @user.tasks.map do |task|
         task.base_hash
       end
+
+      if params[:sort]
+        sorted = tasks.sort_by { |h| h[:date].split('/').reverse }
+        tasks = sorted if params[:sort] == 'asc'
+        tasks = sorted.reverse if params[:sort] == 'desc'
+      end
+
+      if params[:group] && params[:group] == 'true'
+        grouped = {}
+        tasks.map do |task|
+          grouped[task[:date].to_s] = []
+        end
+
+        grouped.sort.to_h
+        tasks.map do |task|
+          grouped[task[:date].to_s] << task.except(:date)
+        end
+
+        tasks = grouped
+      end
+
       render json: {tasks: tasks}
     else
       render json: {status: 404, message: 'user not found'}

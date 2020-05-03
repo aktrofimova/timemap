@@ -74,4 +74,5 @@ Task.create([{ user_id: 1, display_name: "Development", name_identifier: "dev", 
              { user_id: 2, display_name: "Development / Testing", name_identifier: "dev", details: "", date: "2020-04-15", started_at: "9:00AM", ended_at: "1:00PM" },
              { user_id: 12, display_name: "English class", name_identifier: "custom", details: "Attending corporate english class", date: "2020-04-15", hours: "01:00" },
              { user_id: 12, display_name: "Development / Testing", name_identifier: "dev", details: "", date: "2020-04-15", started_at: "09:00:00", ended_at: "12:00:00" },
-             { user_id: 12, display_name: "Development / Testing", name_identifier: "dev", details: "", date: "2020-04-15", started_at: "14:00:00", ended_at: "18:00:00" }])
+             { user_id: 12, display_name: "Development / Testing", name_identifier: "dev", details: "", date: "2020-04-15", started_at: "14:00:00", ended_at: "18:00:00" },
+             { user_id: 1, display_name: "Overtime Hours", name_identifier: "ot", details: "Overtime", date: "2020-04-12", started_at: "17:00:00", ended_at: "19:00:00" }])
