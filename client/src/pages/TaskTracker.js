@@ -9,10 +9,13 @@ class TaskTracker extends Component {
   }
 
   componentDidMount() {
+    // {withCredentials: true})  allows our Rails server to set and read the cookie on the front-end’s browser. ALWAYS pass this argument!
     setTimeout(() => {
+      let base_url = 'http://localhost:3001';
+
       let id = this.props.match.params.id;
-      axios.get('http://localhost:3001/api/users/' + id + '/tasks/',
-        {withCredentials: true}) // This allows our Rails server to set and read the cookie on the front-end’s browser. ALWAYS pass this argument!
+      axios.get(base_url + '/api/users/' + id + '/tasks/',
+        {withCredentials: true})
         .then(response => {
           this.setState({tasks: response.data.tasks});
         })
