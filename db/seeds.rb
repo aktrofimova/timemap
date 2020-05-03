@@ -66,7 +66,8 @@ Timeoff.create([{ user_id: 1, name_identifier: "vac", start_date: "2020-06-02", 
 { user_id: 2, name_identifier: "vac", start_date: "2020-08-10", end_date: "2020-08-14", status: "approved" }])
 
 # create tasks for users
-Task.create([{ user_id: 1, display_name: "Development / Testing", name_identifier: "dev", details: "Developing", date: "2020-04-13", hours: "05:00" },
+Task.create([{ user_id: 1, display_name: "Development", name_identifier: "dev", details: "Developing some stuff", date: "2020-04-12", started_at: "09:00:00", ended_at: "17:00:00" },
+             { user_id: 1, display_name: "Development", name_identifier: "dev", details: "Developing", date: "2020-04-13", hours: "04:30" },
              { user_id: 1, display_name: "Overtime Hours", name_identifier: "ot", details: "Concierge rotation", date: "2020-04-13", started_at: "19:00:00", ended_at: "22:00:00" },
              { user_id: 1, display_name: "Meeting with the client", name_identifier: "custom", details: "Discussing the technical task details", date: "2020-04-13", hours: "00:30" },
              { user_id: 2, display_name: "Development / Testing", name_identifier: "dev", details: "", date: "2020-04-15", started_at: "02:00PM", ended_at: "06:00PM" },

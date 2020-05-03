@@ -44,12 +44,12 @@ class Login extends Component {
       email: email,
       password: password
     }
+    let base_url = 'http://localhost:3001'
 
-    axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
+    axios.post(base_url + '/login', {user}, {withCredentials: true})
       .then(response => {
         if (response.data.logged_in) {
           this.props.handleLogin(response);
-          // TODO add id
           this.redirect('/profile/' + response.data.user.id);
         } else {
           this.setState({errors: response.data.errors});

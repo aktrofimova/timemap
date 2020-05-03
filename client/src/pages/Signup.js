@@ -83,11 +83,12 @@ class Signup extends Component {
       password: password,
       password_confirmation: passwordConfirmation
     }
-    axios.post('http://localhost:3001/api/users', {user}, {withCredentials: true})
+    let base_url = 'http://localhost:3001'
+
+    axios.post(base_url + '/api/users', {user}, {withCredentials: true})
       .then(response => {
         if (response.data.status === 'created') {
           this.props.handleLogin(response.data)
-          // TODO add id
           this.redirect('/profile' + response.data.user.id);
         } else {
           this.setState({
