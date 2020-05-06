@@ -24,7 +24,7 @@ class Project extends Component {
             users: response.data.project.users});
         })
         .catch(error => console.log('api errors:', error))
-    }, 1000)
+    }, 500)
   }
 
   render() {

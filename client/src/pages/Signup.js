@@ -10,21 +10,6 @@ import {
   TextField
 } from "@material-ui/core";
 
-const projects = [
-  {
-    value: "retex",
-    label: "Retex"
-  },
-  {
-    value: "spectar",
-    label: "SpectAR"
-  },
-  {
-    value: "martin-bros",
-    label: "Martin Brothers"
-  }
-];
-
 const roles = [
   {
     value: "employee",
@@ -42,18 +27,32 @@ const roles = [
 
 class Signup extends Component {
   state = {
-    firstName:'',
-    lastName: '',
+    name:'',
     email: '',
     password: '',
-    project: '',
+    passwordConfirmation: '',
+    position: '',
     role: '',
 
-    passwordConfirmation: '',
+    project_id: '',
+    projects: [],
+
     errors: ''
   };
 
   componentDidMount() {
+
+    setTimeout(() => {
+      let base_url = 'http://localhost:3001';
+
+      axios.get(base_url + '/api/projects/',
+        {withCredentials: true})
+        .then(response => {
+          this.setState({projects: response.data.projects});
+        })
+        .catch(error => console.log('api errors:', error))
+    }, 500)
+
     // TM-18: why it doesn't work???
     return this.props.loggedInStatus ? this.redirect() : null
   }
@@ -66,30 +65,35 @@ class Signup extends Component {
   };
 
   handleProjectChange = event => {
-    this.setState({project: event.target.value})
+    this.setState({project_id: event.target.value})
   };
 
   handleRoleChange = event => {
-    this.setState({role: event.target.value})
+    this.setState({role: event.target.value});
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const {firstName, lastName, email, password, passwordConfirmation} = this.state
+    const {name, email, password, passwordConfirmation, project_id, position, role} = this.state
     let user = {
-      first_name: firstName,
-      last_name: lastName,
+      name: name,
       email: email,
       password: password,
-      password_confirmation: passwordConfirmation
+      password_confirmation: passwordConfirmation,
+      position: position,
+      role: role,
+      vac_days_left: role == 'client' ? 0 : 18,
+      has_extended_access: false
     }
-    let base_url = 'http://localhost:3001'
 
-    axios.post(base_url + '/api/users', {user}, {withCredentials: true})
+    let base_url = 'http://localhost:3001';
+    let params = '?project_id=' + project_id
+
+    axios.post(base_url + '/api/users' + params, {user}, {withCredentials: true})
       .then(response => {
         if (response.data.status === 'created') {
-          this.props.handleLogin(response.data)
-          this.redirect('/profile' + response.data.user.id);
+          this.props.handleLogin(response);
+          this.redirect('/profile/' + response.data.user.id);
         } else {
           this.setState({
             errors: response.data.errors
@@ -151,14 +155,14 @@ class Signup extends Component {
 
           <div className="form_block">
               <TextField className="form_input"
-                         select id="selectProject"
+                         select id="project"
                          label="Select Project"
-                         value={this.state.project}
+                         value={this.state.project_id}
                          onChange={this.handleProjectChange}
                          variant="outlined">
-                {projects.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
+                {this.state.projects.map(option => (
+                  <MenuItem key={option.id} value={option.id}>
+                    {option.display_name}
                   </MenuItem>
                 ))}
               </TextField>
@@ -167,7 +171,7 @@ class Signup extends Component {
           </div>
 
           <TextField className="form_input single"
-                     select id="selectRole"
+                     select id="role"
                      label="Select Role"
                      value={this.state.role}
                      onChange={this.handleRoleChange}

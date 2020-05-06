@@ -33,7 +33,7 @@ class App extends Component {
           }
         })
         .catch(error => console.log('api errors:', error))
-    // }, 1000)
+    // }, 500)
   }
 
   handleLogin = (event) => {

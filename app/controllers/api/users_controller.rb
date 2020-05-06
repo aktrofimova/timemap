@@ -32,9 +32,9 @@ class Api::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    if @user.save
-      login!
-      render json: {user: @user, status: :created}
+    if @user.save and Member.new(:user_id => @user.base_hash[:id], :project_id => params[:project_id]).save
+        login!
+        render json: {user: @user, status: :created}
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -111,7 +111,7 @@ class Api::UsersController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def user_params
-    params.fetch(:user, {}).permit(:name, :email, :password, :password_confirmation, :position, :role, :vac_days_left)
+    params.fetch(:user, {}).permit(:name, :email, :password, :password_confirmation, :position, :role, :vac_days_left, :has_extended_access)
     # params.require(:user).permit(:first_name, :last_name, :email, :password_digest)
   end
 
