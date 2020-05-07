@@ -1,0 +1,62 @@
+
+.form {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  &_block {
+    display: flex;
+    justify-content: space-between;
+
+    & > * {
+      flex-basis: 48%;
+    }
+  }
+
+  &_input {
+    margin: 0 0 20px !important;
+    text-align: left;
+  }
+
+  &_buttons {
+    button {
+      @include transition(.3);
+      background-color: white;
+      border: 1px solid;
+      border-radius: 5px;
+      padding: 13px 0;
+      font-size: 16px;
+      font-weight: bold;
+
+      &:hover {
+        cursor: pointer;
+        color: white;
+      }
+    }
+  }
+
+  &_cancel {
+    flex-basis: 38%;
+    margin-right: auto;
+    border-color: $blue_dark;
+    color: $blue_dark;
+    &:hover {
+      background-color: $blue_dark;
+    }
+  }
+
+  &_submit {
+    flex-basis: 58%;
+    margin-left: auto;
+    border-color: $pink_dark;
+    color: $pink_dark;
+    &:hover {
+      background-color: $pink_dark;
+    }
+  }
+
+  &_txt {
+    margin-top: 30px;
+  }
+}

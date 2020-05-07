@@ -9,7 +9,6 @@ class Api::ProjectsController < ApplicationController
     if @projects
       projects_hash = @projects.map do |project|
         project.base_hash
-          .merge!(:members_count => project.users&.count)
       end
       render json: {projects: projects_hash}
     else
@@ -21,7 +20,6 @@ class Api::ProjectsController < ApplicationController
   def show
     if @project
       project_hash = @project.base_hash
-                       .merge!(:members_count => @project.users&.count)
 
       users = @project.users.map do |user|
         user.base_hash

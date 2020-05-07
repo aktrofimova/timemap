@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField} from "@material-ui/core";
-import clsx from "clsx";
+// import clsx from "clsx";
 import {Visibility, VisibilityOff} from "@material-ui/icons";
 
 class Login extends Component {
@@ -13,8 +13,10 @@ class Login extends Component {
     errors: ''
   };
 
-  componentWillMount() {
-    // TM-18
+
+
+  componentDidMount() {
+    // TM-18: why it doesn't work???
     return this.props.loggedInStatus ? this.redirect() : null
   }
 
@@ -42,12 +44,13 @@ class Login extends Component {
       email: email,
       password: password
     }
+    let base_url = 'http://localhost:3001'
 
-    axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
+    axios.post(base_url + '/login', {user}, {withCredentials: true})
       .then(response => {
         if (response.data.logged_in) {
-          this.props.handleLogin(response.data);
-          this.redirect();
+          this.props.handleLogin(response);
+          this.redirect('/profile/' + response.data.user.id);
         } else {
           this.setState({errors: response.data.errors});
         }
@@ -55,8 +58,8 @@ class Login extends Component {
       .catch(error => console.log('api errors:', error))
   };
 
-  redirect = () => {
-    this.props.history.push('/')
+  redirect = (path) => {
+    this.props.history.push(path)
   }
 
   handleErrors = () => {
@@ -73,18 +76,13 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Log In</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <TextField required variant="outlined" type="email" id="email" label="E-Mail"/>
-          </div>
+      <div className="login framed_page">
+        <h1 className="header login_header">Log In</h1>
+        <form className="form login_form" onSubmit={this.handleSubmit}>
+            <TextField className="form_input" required variant="outlined" type="email" id="email" label="E-Mail" onChange={this.handleChange}/>
 
-          <div>
-            <FormControl required variant="outlined">
-              <InputLabel htmlFor="password">
-                Password
-              </InputLabel>
+            <FormControl className="form_input" required variant="outlined" >
+              <InputLabel htmlFor="password">Password</InputLabel>
               <OutlinedInput
                 id="password"
                 type={this.state.showPassword ? "text" : "password"}
@@ -105,13 +103,15 @@ class Login extends Component {
                 labelWidth={85}
               />
             </FormControl>
-          </div>
 
-          <div>
-            <Button variant="outlined" color="secondary">Go to presentation</Button>
-            <Button variant="outlined" color="primary" type="submit">Log In</Button>
-            <Button variant="outlined" color="default"><Link to='/signup'>Sign up</Link></Button>
+
+          <div className="form_block form_buttons">
+            {/*<Button className="login_back" variant="outlined">Back</Button>*/}
+            {/*<Button className="login_submit" variant="outlined" type="submit">Log In</Button>*/}
+            <button onClick={() => window.history.back()} className="form_cancel">Back</button>
+            <button className="form_submit" type="submit">Log In</button>
           </div>
+          <p className="form_txt">Do not have an account? <Link className="cta_link primary" to='/signup'>Sign up</Link></p>
 
         </form>
         <div>{this.state.errors ? this.handleErrors() : null}</div>

@@ -9,7 +9,8 @@ class Project < ApplicationRecord
       :id => id,
       :display_name => display_name,
       :name_identifier => name_identifier,
-      :details => details
+      :details => details,
+      :members_count => users&.count
     }
   end
 end

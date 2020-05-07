@@ -22,12 +22,17 @@ class Timeoff < ApplicationRecord
 
   def base_hash
     {
+      :id => id,
       :name_identifier => name_identifier,
-      :project_id => user.project&.display_name,
-      :start_date => start_date,
-      :end_date => end_date,
+      :project => user.project&.display_name,
+      :start_date => get_formated_date(start_date),
+      :end_date => get_formated_date(end_date),
       :total_days => total_days,
       :status => real_status
     }
+  end
+
+  def get_formated_date(date)
+    Date.parse(date.to_s).strftime("%m/%d/%Y")
   end
 end

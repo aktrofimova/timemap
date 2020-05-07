@@ -32,7 +32,7 @@ class User < ApplicationRecord
       :email => email,
       :position => position,
       :role => role,
-      :vac_days_left => vac_days_left,
+      :vac_days_left => vac_days_left || '',
     }
   end
 end

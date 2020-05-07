@@ -1,0 +1,53 @@
+
+.tool_bar {
+  &_item {
+    display: inline-block;
+    font-size: 18px;
+    padding: 0 15px;
+    color: $blue_dark;
+    text-decoration: none;
+
+    &.name {
+      font-size: 14px;
+      position: relative;
+      top: 2px;
+    }
+  }
+
+  &_link {
+    @include transition(.4);
+    box-sizing: border-box;
+    background-color: white;
+    border: none;
+    border-bottom: 1px solid transparent;
+    //border: 1px solid $blue_dark;
+    margin: 0 0 0 30px;
+    padding: 10px 3px 5px;
+
+
+    &:hover {
+      cursor: pointer;
+      border-color: $blue_dark;
+    }
+  }
+
+  &_left {
+    display: flex;
+    align-items: center;
+
+  }
+
+  &_right {
+    margin-left: auto;
+  }
+}
+
+.logo {
+  display: inline-block;
+  max-height: $header_height;
+
+  &_img {
+    max-height: inherit;
+    width: 45px;
+  }
+}

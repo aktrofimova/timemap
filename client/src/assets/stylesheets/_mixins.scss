@@ -1,0 +1,13 @@
+@mixin transition($sec) {
+  transition: all #{$sec}s ease;
+  &:hover {
+    transition: all #{$sec}s ease;
+  }
+}
+
+@mixin header_dash {
+  &:before, &:after {
+    content: '-';
+    margin: 30px;
+  }
+}
