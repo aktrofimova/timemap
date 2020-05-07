@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Aux from "../hoc/Aux";
 
 
 class Profile extends Component {
@@ -8,7 +9,8 @@ class Profile extends Component {
   constructor(props){
     super(props);
     this.state = {
-      user: {}
+      user: {},
+      isSameUser: false
     };
   }
 
@@ -20,7 +22,12 @@ class Profile extends Component {
         .then(response => {
           this.setState({user: response.data.user});
         })
-        .catch(error => console.log('api errors:', error))
+        .catch(error => console.log('api errors:', error));
+
+      if (this.props.currentUser.id == id || this.props.currentUser.role == "manager")
+        this.setState({isSameUser: true});
+
+
     }, 500)
   }
 
@@ -36,8 +43,12 @@ class Profile extends Component {
           <div className="profile_left">
             {/* image here*/}
             <div style={{display: 'inline-block', width: '100px', height: '100px', border: '1px solid #ebebeb', backgroundColor: '#ebebeb'}}></div>
-            <p>Vacation days: {user.vac_days_left}</p>
-            <Link className="cta_btn secondary profile_button" to="/edit">Edit profile</Link>
+
+            {this.state.isSameUser ? <Aux>
+              <p>Vacation days: {user.vac_days_left}</p>
+              <Link className="cta_btn secondary profile_button" to="/edit">Edit profile</Link>
+            </Aux> : null}
+
           </div>
 
           <div className="profile_right">

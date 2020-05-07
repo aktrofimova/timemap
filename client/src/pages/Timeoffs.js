@@ -49,7 +49,7 @@ class Timeoffs extends Component {
         {this.state.isSameUser ? <NewTimeoff className="timeoffs_new"/> : null }
         <p style={{borderBottom: '1px solid #ccc', paddingBottom: '15px'}}></p>
         <div className="timeoffs_all">
-          {this.state.timeoffs.map((timeoff) => <TimeoffCard key={timeoff.id} timeoff={timeoff}/>)}
+          {this.state.timeoffs.map((timeoff) => <TimeoffCard key={timeoff.id} currentUser={this.props.currentUser} timeoff={timeoff}/>)}
         </div>
       </div>
     );

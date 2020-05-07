@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -71,7 +71,7 @@ class App extends Component {
             )} />
 
             <Route exact path="/profile/:id" render={props => (
-              <Profile {...props} loggedInStatus={this.state.isLoggedIn}/>
+              <Profile {...props} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.user}/>
             )} />
 
             <Route exact path="/project/:id" render={props => (
@@ -101,4 +101,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
