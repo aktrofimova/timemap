@@ -9,13 +9,15 @@ class Project extends Component {
     super(props);
     this.state = {
       project: {},
-      users: []
+      users: [],
+      allowIndicator: false
     };
   }
   componentDidMount() {
     setTimeout(() => {
+      let base_url = 'http://localhost:3001';
       let id = this.props.match.params.id;
-      axios.get('http://localhost:3001/api/projects/' + id,
+      axios.get(base_url + '/api/projects/' + id,
         {withCredentials: true}) // This allows our Rails server to set and read the cookie on the front-end’s browser. ALWAYS pass this argument!
         .then(response => {
           // console.log(response.data);
@@ -24,6 +26,10 @@ class Project extends Component {
             users: response.data.project.users});
         })
         .catch(error => console.log('api errors:', error))
+
+      if (this.props.currentUser.role == "manager")
+        this.setState({allowIndicator: true});
+
     }, 500)
   }
 
@@ -36,7 +42,7 @@ class Project extends Component {
         <div className="project_users">
           <h3 className="project_members">Members ({this.state.project.members_count}):</h3>
           {this.state.users.map(user =>
-            <UserCard key={user.id} displayUser={user} />
+            <UserCard key={user.id} allowIndicator={this.state.allowIndicator} displayUser={user} />
           )}
         </div>
       </div>

@@ -1,9 +1,11 @@
 import React, { useState, useEffect }  from 'react';
 import axios from 'axios';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, Route} from 'react-router-dom';
 import { makeStyles} from "@material-ui/core/styles";
 import Aux from '../hoc/Aux';
 import Logo from '../components/Logo';
+import TaskTracker from '../pages/TaskTracker';
+import Timeoffs from '../pages/Timeoffs';
 import Home from '../pages/Home';
 import { AppBar, Toolbar, IconButton, Menu, MenuItem }from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -89,7 +91,7 @@ const Header = (props) => {
         <div className="tool_bar_right">
           {props.loggedInStatus ?
             <Aux>
-              <p className="tool_bar_item name">{props.currentUser.name}</p>
+              <p className="tool_bar_item name" data-id={props.currentUser.id}>{props.currentUser.name}</p>
 
               <IconButton
                 className="tool_bar_item account"

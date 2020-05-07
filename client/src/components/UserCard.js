@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
 class UserCard extends Component {
   state = {
-
+    timeoffs: []
   }
 
   componentDidMount() {
+    setTimeout(() => {
+      let base_url = 'http://localhost:3001';
 
+      axios.get(base_url + '/api/users/' + this.props.displayUser.id + '/timeoffs',
+        {withCredentials: true})
+        .then(response => {
+          this.setState({timeoffs: response.data.timeoffs});
+        })
+        .catch(error => console.log('api errors:', error))
+    }, 500)
   }
 
   render() {
     let displayUser = this.props.displayUser,
-      email = displayUser.email;
+      email = displayUser.email,
+      timeoffs = this.state.timeoffs,
+      hasPending = timeoffs.find(timeoff => timeoff.status == 'pending');
 
     return (
-        <Link className="user_card" to={"/profile/" + displayUser.id}>
+        <Link className="user_card" to={"/profile/" + displayUser.id} data-id={displayUser.id}>
+          {this.props.allowIndicator && hasPending ? <div className="user_card_timeoff_indicator"></div> : null}
+          <div className="user_card_role_indicator">{this.props.displayUser.role}</div>
           <div className="user_card_left" >
-            <div style={{display: 'inline-block', width: '100px', height: '100px', border: '1px solid black'}}>image here</div>
+            {/* image here*/}
+            <div style={{display: 'inline-block', width: '100px', height: '100px', border: '1px solid #ebebeb', backgroundColor: '#ebebeb'}}></div>
           </div>
           <div className="user_card_right">
             <p className="user_card_name">{displayUser.name}</p>

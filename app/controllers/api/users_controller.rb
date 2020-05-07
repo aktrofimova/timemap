@@ -91,11 +91,16 @@ class Api::UsersController < ApplicationController
   # GET /users/1/timeoffs
   def user_timeoffs
     if @user
-      all = @user.timeoffs
 
-      timeoffs = all.map do |timeoff|
+      timeoffs = @user.timeoffs.map do |timeoff|
         timeoff.base_hash
       end
+
+      # if params[:sort]
+      #   sorted = timeoffs.sort_by { |h| h[:start_date].split('/').reverse }
+      #   timeoffs = sorted if params[:sort] == 'asc'
+      #   timeoffs = sorted.reverse if params[:sort] == 'desc'
+      # end
 
       render json: {timeoffs: timeoffs}
     else

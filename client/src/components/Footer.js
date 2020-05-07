@@ -22,9 +22,9 @@ class Footer extends Component {
             <p>Ukrainian name of paper: "Розробка веб-додатку обліку робочого часу співробітників"</p>
           </section>
           <section className="footer_right">
-            <Link className="cta_link primary" to="https://docs.google.com/document/d/1h9ougJbHx0-x3wYmidEQufosz9qJJPxVmj3aP5nqc-Y/edit" target="_blank">See Diploma paper</Link>
-            <Link className="cta_link primary" to="https://github.com/aktrofimova/timemap" target="_blank">See project on GitHub</Link>
-            <Link className="cta_link primary" to="mailto: anita.trofim@gmail.com">Send Email to the author</Link>
+            <a className="cta_link primary" href="https://docs.google.com/document/d/1h9ougJbHx0-x3wYmidEQufosz9qJJPxVmj3aP5nqc-Y/edit" target="_blank">See Diploma paper</a>
+            <a className="cta_link primary" href="https://github.com/aktrofimova/timemap" target="_blank">See project on GitHub</a>
+            <a className="cta_link primary" href="mailto: anita.trofim@gmail.com">Send Email to the author</a>
           </section>
         </div>
       </div>

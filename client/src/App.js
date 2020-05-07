@@ -75,7 +75,7 @@ class App extends Component {
             )} />
 
             <Route exact path="/project/:id" render={props => (
-              <Project {...props} loggedInStatus={this.state.isLoggedIn}/>
+              <Project {...props} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.user}/>
             )} />
 
             <Route exact path="/profile/:id/tasks" render={props => (
@@ -83,7 +83,7 @@ class App extends Component {
             )} />
 
             <Route exact path="/profile/:id/timeoffs" render={props => (
-              <Timeoffs {...props} loggedInStatus={this.state.isLoggedIn}/>
+              <Timeoffs {...props} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.user}/>
             )} />
 
             <Route path="/users" component={TestUsers}></Route>

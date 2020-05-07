@@ -18,7 +18,6 @@ class NewTask extends Component {
     ended_at: new Date(),
     date: '',
     hours: ''
-
   }
 
   componentDidMount() {
@@ -76,7 +75,8 @@ class NewTask extends Component {
                    onChange={this.handleTaskChange}>
           {tasks.map(option => (
             <MenuItem key={option.value} value={option.value}>
-              Project Name: {option.label}
+              {/*Project Name: {option.label}*/}
+              {option.label}
             </MenuItem>
           ))}
         </TextField>

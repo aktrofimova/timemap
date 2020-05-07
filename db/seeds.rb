@@ -59,8 +59,8 @@ Member.create([{ user_id: 1, project_id: 1 },
                { user_id: 18, project_id: 3 }])
 
 # create timeoffs for users
-Timeoff.create([{ user_id: 1, name_identifier: "vac", start_date: "2020-06-02", end_date: "2020-06-05", status: "approved" },
-{ user_id: 1, name_identifier: "vac", start_date: "2020-07-02", end_date: "2020-07-02", status: "pending" },
+Timeoff.create([{ user_id: 1, name_identifier: "vac", start_date: "2020-07-02", end_date: "2020-07-02", status: "pending" },
+{ user_id: 1, name_identifier: "vac", start_date: "2020-06-02", end_date: "2020-06-05", status: "approved" },
 { user_id: 1, name_identifier: "ill", start_date: "2020-04-13", end_date: "2020-04-15", status: "approved" },
 { user_id: 2, name_identifier: "vac", start_date: "2020-04-17", end_date: "2020-04-19", status: "pending" },
 { user_id: 2, name_identifier: "vac", start_date: "2020-08-10", end_date: "2020-08-14", status: "approved" }])
@@ -69,6 +69,7 @@ Timeoff.create([{ user_id: 1, name_identifier: "vac", start_date: "2020-06-02", 
 Task.create([{ user_id: 1, display_name: "Development", name_identifier: "dev", details: "Developing some stuff", date: "2020-04-12", started_at: "09:00:00", ended_at: "17:00:00" },
              { user_id: 1, display_name: "Development", name_identifier: "dev", details: "Developing", date: "2020-04-13", hours: "04:30" },
              { user_id: 1, display_name: "Overtime Hours", name_identifier: "ot", details: "Concierge rotation", date: "2020-04-13", started_at: "19:00:00", ended_at: "22:00:00" },
+             { user_id: 1, display_name: "Development", name_identifier: "dev", details: "Small task", date: "2020-04-13", hours: "00:30" },
              { user_id: 1, display_name: "Meeting with the client", name_identifier: "custom", details: "Discussing the technical task details", date: "2020-04-13", hours: "00:30" },
              { user_id: 2, display_name: "Development / Testing", name_identifier: "dev", details: "", date: "2020-04-15", started_at: "02:00PM", ended_at: "06:00PM" },
              { user_id: 2, display_name: "Development / Testing", name_identifier: "dev", details: "", date: "2020-04-15", started_at: "9:00AM", ended_at: "1:00PM" },

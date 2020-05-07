@@ -34,7 +34,8 @@ class Profile extends Component {
 
         <div className="profile_content">
           <div className="profile_left">
-            <div style={{display: 'inline-block', width: '100px', height: '100px', border: '1px solid black'}}>image here</div>
+            {/* image here*/}
+            <div style={{display: 'inline-block', width: '100px', height: '100px', border: '1px solid #ebebeb', backgroundColor: '#ebebeb'}}></div>
             <p>Vacation days: {user.vac_days_left}</p>
             <Link className="cta_btn secondary profile_button" to="/edit">Edit profile</Link>
           </div>

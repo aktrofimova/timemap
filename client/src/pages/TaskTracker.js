@@ -5,35 +5,66 @@ import axios from 'axios';
 
 class TaskTracker extends Component {
   state = {
-    tasks: []
+    tasks: [],
+    user: {},
+    isSameUser: false,
   }
 
   componentDidMount() {
     // {withCredentials: true})  allows our Rails server to set and read the cookie on the front-end’s browser. ALWAYS pass this argument!
-    setTimeout(() => {
-      let base_url = 'http://localhost:3001';
-      let params = '&sort=desc&group=true';
+    let base_url = 'http://localhost:3001';
+    let params = '?sort=desc&group=true';
+    let id = this.props.match.params.id;
 
-      let id = this.props.match.params.id;
-      axios.get(base_url + '/api/users/' + id + '/tasks/' + params,
+    setTimeout(() => {
+      axios.get(base_url + '/api/users/' + id + '/tasks' + params,
         {withCredentials: true})
         .then(response => {
           this.setState({tasks: response.data.tasks});
         })
-        .catch(error => console.log('api errors:', error))
-    }, 500)
+        .catch(error => console.log('api errors:', error));
+
+      axios.get(base_url + '/api/users/' + id,
+        {withCredentials: true})
+        .then(response => {
+          this.setState({user: response.data.user});
+        })
+        .catch(error => console.log('api errors:', error));
+
+      if (this.props.currentUser.id == this.props.match.params.id)
+        this.setState({isSameUser: true});
+    }, 500);
+
+
+  }
+
+  getDateInWords = (rawDate) => {
+    var date = new Date(rawDate) || new Date();
+    var dateArr = date.toDateString().split(' ');
+    return dateArr[2] + ' ' + dateArr[1] + ' ' + dateArr[3];
   }
 
   render() {
+    let blocks = [];
+    { for (let [key, value] of Object.entries(this.state.tasks)) {
+      blocks.push(<div key={key} className="tasks_block">
+        <div className="tasks_up">
+          <p>{this.getDateInWords(key)}</p>
+          {/*<p><span style={{fontSize: '14px'}}>Total time:</span> <span>00:00</span></p>*/}
+        </div>
+        <div className="tasks_down">
+          {value.map((task) => <TaskCard key={task.id} task={task}/>)}
+        </div>
+      </div>)
+    }}
+
     return (
       <div className="tasks page">
-        <h1 className="header tasks_header">Task Tracker: {this.props.currentUser.name}</h1>
+        <h1 className="header tasks_header">Task Tracker: {this.state.user.name}</h1>
 
-        <NewTask className="tasks_new"/>
+        {this.state.isSameUser ? <NewTask className="tasks_new"/> : null }
         <p style={{borderBottom: '1px solid #ccc', paddingBottom: '15px'}}></p>
-        {/*<div className="tasks_all">*/}
-          {/*{this.state.tasks.map((task) => <TaskCard key={task.id} task={task}/>)}*/}
-        {/*</div>*/}
+        {blocks.map(block => block) || null}
       </div>
     );
   }
