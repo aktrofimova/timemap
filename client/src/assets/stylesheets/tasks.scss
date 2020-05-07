@@ -1,0 +1,80 @@
+
+.tasks {
+  &_header {
+    margin-bottom: 40px;
+  }
+
+  &_up {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: #f2f2f2
+  }
+
+  &_down {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+
+
+.new_task {
+  display: flex;
+  justify-content: space-between;
+
+  &_select {
+    min-width: 250px !important;
+    text-align: left;
+  }
+
+  &_details {
+    width: 18%;
+    min-width: 180px;
+  }
+
+  &_time {
+    max-width: 125px;
+  }
+
+  &_date {
+    max-width: 155px;
+  }
+
+  &_hours {
+    max-width: 75px;
+  }
+
+}
+
+.tasks_block {
+  margin: 20px 0;
+  box-shadow: $box_shadow;
+}
+
+.task {
+  display: flex;
+  padding: 0 20px;
+  border-bottom: 1px solid #f2f2f2;
+
+  &_right {
+    margin-left: auto;
+  }
+
+  &_item {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  &_name {
+    color: $pink_dark;
+    margin-right: 40px;
+    min-width: 270px;
+    text-align: left;
+  }
+
+  &_hours {
+    color: $pink_dark;
+  }
+}

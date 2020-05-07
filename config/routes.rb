@@ -1,9 +1,21 @@
 Rails.application.routes.draw do
 
-  resources :users, only: [:create, :show, :index]
-  # resources :users
+  namespace :api do
 
-  # root to: 'users#show'
+    # resources :users, only: [:create, :show, :index]
+    resources :users
+    get 'users/:id/tasks', to: 'users#user_tasks'
+    get 'users/:id/timeoffs', to: 'users#user_timeoffs'
+    resources :projects
+    resources :tasks
+    resources :timeoffs
+
+    # GET localhost:3001/api
+    root to: 'users#index'
+  end
+
+  # GET localhost:3001/
+  root to: 'api/users#index'
 
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
@@ -11,8 +23,12 @@ Rails.application.routes.draw do
 
 
   # Routes on front-end
-  # / - presentation (root path)
+  # / - home page
   # /signup - show a form to create(edit) a user
   # /login - show a form to login a user
+  # /profile/:id - show user's profile
+  # /project/:id - show project's profile
+  # /profile/:id/tasks - show user's tasks
+  # /profile/:id/timeoffs - show user's time offs
 
 end

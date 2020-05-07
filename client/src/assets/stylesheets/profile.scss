@@ -1,0 +1,26 @@
+
+.profile {
+  width: 80%;
+  box-shadow: $box_shadow;
+
+  &_content {
+    display: flex;
+  }
+
+  &_left {
+    flex-basis: 30%;
+  }
+
+  &_right {
+    flex-basis: 70%;
+  }
+
+  &_name {
+    font-weight: bold;
+  }
+
+  &_button {
+    font-size: 14px;
+    border-width: 1px;
+  }
+}

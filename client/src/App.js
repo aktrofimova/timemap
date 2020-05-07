@@ -1,58 +1,63 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Route, Switch } from 'react-router-dom';
-import Presentation from './pages/Presentation';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Profile from "./pages/Profile";
+import Project from "./pages/Project";
+import TaskTracker from "./pages/TaskTracker";
+import Timeoffs from "./pages/Timeoffs";
 import TestUsers from './components/TestUsers';
-import AppBarTM from "./components/AppBarTM";
+import Header from "./components/Header";
 
 import './App.css';
+import './assets/stylesheets/main.scss'
 
 class App extends Component {
   state = {
     isLoggedIn: false,
     user: {},
-    snackMessage: ""
+    project: {}
   };
 
   componentDidMount() {
-    this.loginStatus()
+    // setTimeout(() => {
+      axios.get('http://localhost:3001/logged_in',
+        {withCredentials: true}) // This allows our Rails server to set and read the cookie on the front-end’s browser. ALWAYS pass this argument!
+        .then(response => {
+          if (response.data.logged_in) {
+            this.handleLogin(response);
+          } else {
+            this.handleLogout();
+          }
+        })
+        .catch(error => console.log('api errors:', error))
+    // }, 500)
   }
 
-  handleLogin = (data) => {
+  handleLogin = (event) => {
     this.setState({
       isLoggedIn: true,
-      user: data.user
+      user: event.data.user,
+      project: event.data.user.project
     })
   }
   handleLogout = () => {
     this.setState({
       isLoggedIn: false,
-      user: {}
+      user: {},
+      project: {}
     })
-  }
-
-  loginStatus = () => {
-    axios.get('http://localhost:3001/logged_in',
-      {withCredentials: true}) // This allows our Rails server to set and read the cookie on the front-end’s browser. ALWAYS pass this argument!
-      .then(response => {
-        if (response.data.logged_in) {
-          this.handleLogin(response);
-        } else {
-          this.handleLogout();
-        }
-      })
-      .catch(error => console.log('api errors:', error))
   }
 
   render() {
     return (
       <div className="App">
 
-        <AppBarTM loggedInStatus={this.state.isLoggedIn} handleLogout={this.handleLogout}/>
+        <Header loggedInStatus={this.state.isLoggedIn} currentUser={this.state.user} handleLogout={this.handleLogout}/>
 
-        <main style={{marginTop: "94px"}}>
+        <main className="main">
           {/* with exact the order doesn't matter, w/o exact it does */}
           {/* Switch + order is alternative to exact */}
           <Switch>
@@ -65,16 +70,35 @@ class App extends Component {
               <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>
             )} />
 
+            <Route exact path="/profile/:id" render={props => (
+              <Profile {...props} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.user}/>
+            )} />
+
+            <Route exact path="/project/:id" render={props => (
+              <Project {...props} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.user}/>
+            )} />
+
+            <Route exact path="/profile/:id/tasks" render={props => (
+              <TaskTracker {...props} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.user}/>
+            )} />
+
+            <Route exact path="/profile/:id/timeoffs" render={props => (
+              <Timeoffs {...props} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.user}/>
+            )} />
+
             <Route path="/users" component={TestUsers}></Route>
 
-            <Route path="/" component={Presentation}></Route>
+            <Route path="/" render={props => (
+              <Home {...props} loggedInStatus={this.state.isLoggedIn} currentUserId={this.state.user.id}/>
+            )} />
 
           </Switch>
         </main>
+
 
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

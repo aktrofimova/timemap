@@ -1,0 +1,71 @@
+@import 'variables', './mixins'; // helper files
+
+.App {
+  color: $blue_dark;
+  padding: 0 50px;
+}
+
+.main {
+  padding-top: $header_height;
+}
+
+.header {
+  @include header_dash;
+}
+
+.page {
+  margin: 70px 0 100px;
+}
+
+.framed_page {
+  margin: calc(#{$header_height} + 50px) auto 100px;
+  padding: 30px 0 60px;
+}
+
+.cta_btn {
+  @include transition(.3);
+  font-size: 18px;
+  border: 2px solid;
+  border-radius: 5px;
+  background-color: white;
+  padding: 12px 20px;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 20px auto;
+  max-width: 300px;
+
+  &.primary {
+    border-color: $pink_dark;
+    color: $pink_dark;
+    &:hover {
+      background-color: $pink_dark;
+    }
+  }
+
+  &.secondary {
+    border-color: $blue_dark;
+    color: $blue_dark;
+    &:hover {
+      background-color: $blue_dark;
+    }
+  }
+
+  &:hover {
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.cta_link {
+  margin: 0 10px;
+  &.primary {
+    color: $pink_dark;
+  }
+  &.secondary {
+    color: $blue_light;
+  }
+}
+
+
+@import './home', './login', './signup', './profile'; // styles for pages
+@import './header', './footer', './form', './project', './tasks', './timeoffs'; // styles for components
