@@ -18,7 +18,7 @@ class TaskCard extends Component {
 
     return (
       <div className="task" data-id={this.props.task.id}>
-          <p className="task_name task_item">{this.props.task.project + ': ' + this.props.task.display_name}</p>
+          <p className="task_name task_item">{this.props.task.project + ': '} <span className="primary_colour">{this.props.task.display_name}</span></p>
           <p className="task_details task_item">{this.props.task.details}</p>
 
           <div className="task_right">

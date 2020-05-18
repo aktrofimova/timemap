@@ -32,11 +32,11 @@ class TimeoffCard extends Component {
     let showApproveBtns = this.props.currentUser.role == "manager" && this.props.timeoff.status == "pending";
     return (
       <div className="timeoff" data-id={this.props.timeoff.id}>
-        <p className="timeoff_name timeoff_item">{this.props.timeoff.project + ': ' + timeoff_types[this.props.timeoff.name_identifier]}</p>
+        <p className="timeoff_name timeoff_item">{this.props.timeoff.project + ': '} <span className="primary_colour">{timeoff_types[this.props.timeoff.name_identifier]}</span></p>
         <p className="timeoff_time timeoff_item"><span>{this.getDateInWords(this.props.timeoff.start_date)}</span> - <span>{this.getDateInWords(this.props.timeoff.end_date)}</span></p>
-        <p className="timeoff_hours timeoff_item"><span style={{fontSize: '14px'}}>Total days:</span> {this.props.timeoff.total_days}</p>
+        <p className="timeoff_days timeoff_item"><span style={{fontSize: '14px'}}>Total days:</span> <span className="primary_colour">{this.props.timeoff.total_days}</span></p>
         <form className="timeoff_right">
-          <p className={"timeoff_hours timeoff_item " + "timeoff_status_" + this.props.timeoff.status}>{this.props.timeoff.status}</p>
+          <p className={"timeoff_item " + "timeoff_status_" + this.props.timeoff.status}>{this.props.timeoff.status}</p>
           { showApproveBtns ? <div className="timeoff_buttons">
             <button className="timeoff_cancel" onClick={this.handleReject}>Reject</button>
             <button className="timeoff_submit" onClick={this.handleSubmit} type="submit">Approve</button>
