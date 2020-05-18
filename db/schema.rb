@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2020_04_18_120912) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "members", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
-    t.integer "project_id"
+    t.bigint "user_id"
+    t.bigint "project_id"
     t.index ["project_id"], name: "index_members_on_project_id"
     t.index ["user_id", "project_id"], name: "index_members_on_user_id_and_project_id", unique: true
     t.index ["user_id"], name: "index_members_on_user_id"
@@ -39,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_04_18_120912) do
     t.time "ended_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "name_identifier"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
@@ -50,7 +53,7 @@ ActiveRecord::Schema.define(version: 2020_04_18_120912) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "name_identifier"
     t.index ["user_id"], name: "index_timeoffs_on_user_id"
   end

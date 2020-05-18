@@ -115,7 +115,7 @@ class NewTask extends Component {
 
         </MuiPickersUtilsProvider>
 
-        <TextField id="hours" className="new_task_field new_task_hours" label="Hours" defaultValue="05:15" onChange={this.handleChange}/>
+        <TextField id="hours" className="new_task_field new_task_hours" label="Hours" defaultValue="00:00" onChange={this.handleChange}/>
 
         <Button variant="outlined">Add Task</Button>
 
