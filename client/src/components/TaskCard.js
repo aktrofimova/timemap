@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
 class TaskCard extends Component {
   state = {
@@ -12,12 +12,6 @@ class TaskCard extends Component {
   }
 
   componentDidMount() {
-
-  }
-
-  deleteTask() {
-    console.log('this.props.task.id', this.props.task.id)
-
 
   }
 
@@ -33,7 +27,7 @@ class TaskCard extends Component {
           <div className="task_right">
             {displayTimeRange ? <p className="task_time task_item"><span>{this.props.task.started_at}</span> - <span>{this.props.task.ended_at}</span></p> : null}
             <p className="task_hours task_item">{this.props.task.hours}</p>
-            <IconButton className="task_delete" onClick={()=>{axios.delete(window.base_api_url + '/tasks/' + this.props.task.id);}}><DeleteIcon fontSize="small"/></IconButton>
+            <IconButton className="task_delete" title="Delete task" onClick={()=>{axios.delete(window.base_api_url + '/tasks/' + this.props.task.id);}}><DeleteOutlinedIcon fontSize="small"/></IconButton>
           </div>
 
       </div>

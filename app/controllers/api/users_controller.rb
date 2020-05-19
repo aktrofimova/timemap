@@ -96,11 +96,11 @@ class Api::UsersController < ApplicationController
         timeoff.base_hash
       end
 
-      # if params[:sort]
-      #   sorted = timeoffs.sort_by { |h| h[:start_date].split('/').reverse }
-      #   timeoffs = sorted if params[:sort] == 'asc'
-      #   timeoffs = sorted.reverse if params[:sort] == 'desc'
-      # end
+      if params[:sort]
+        sorted = timeoffs.sort_by { |h| h[:start_date].split('/').reverse }
+        timeoffs = sorted if params[:sort] == 'asc'
+        timeoffs = sorted.reverse if params[:sort] == 'desc'
+      end
 
       render json: {timeoffs: timeoffs}
     else

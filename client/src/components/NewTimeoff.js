@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import 'date-fns';
+import axios from 'axios';
 import { Button, MenuItem, TextField } from "@material-ui/core";
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
@@ -18,16 +19,10 @@ const NewTimeoff = () => {
   const [project, setProject] = React.useState('First Project'),
     [startDate, setStartDate] = React.useState(new Date()),
     [endDate, setEndDate] = React.useState(new Date()),
-    [timeoff, setTimeoff] = React.useState(''),
-    [nameIdentifier, setNameIdentifier] = React.useState(''),
-    [status, setStatus] = React.useState('');
+    [name, setName] = React.useState('');
 
-  const handleTimeoffChange = event => {
-    setTimeoff(event.target.value);
-  };
-
-  const handleNameIdentifierChange = event => {
-    setNameIdentifier(event.target.value);
+  const handleNameChange = event => {
+    setName(event.target.value);
   };
 
   const handleStartDateChange = date => {
@@ -38,15 +33,45 @@ const NewTimeoff = () => {
     setEndDate(date);
   };
 
+  const handleSubmit = event => {
+    event.preventDefault();
+    console.log(event);
+
+    let userId = 1;
+
+    let timeoff = {
+      name_identifier: name,
+      user_id: userId,
+      start_date: startDate,
+      end_date: endDate
+    };
+
+    let params = '';
+
+    axios.post(window.base_api_url + '/timeoffs' + params, {timeoff}, {withCredentials: true})
+      .then(response => {
+        if (response.data.status === 'created') {
+          console.log('timeoff created');
+        } else {
+          this.setState({
+            errors: response.data.errors
+          })
+        }
+      })
+      .catch(error => console.log('api errors:', error))
+
+
+  };
+
   return (
 
     <div>
-      <div className="new_timeoff">
+      <form className="new_timeoff" onSubmit={handleSubmit}>
         <TextField className="new_timeoff_field new_timeoff_select"
                    select id="name_identifier"
                    label="Select Time Off Type"
                   // value={this.state.timeoff}
-                   onChange={handleTimeoffChange}>
+                   onChange={handleNameChange}>
           {timeoffs.map(option => (
             <MenuItem key={option.name_identifier} value={option.name_identifier}>
               {/*Project Name: {option.label}*/}
@@ -83,9 +108,9 @@ const NewTimeoff = () => {
 
         </MuiPickersUtilsProvider>
 
-        <Button style={{maxHeight: '48px', width: '10%'}} variant="outlined">Request</Button>
+        <Button style={{maxHeight: '48px', width: '10%'}} variant="outlined" type="submit">Request</Button>
 
-      </div>
+      </form>
     </div>
   );
 }

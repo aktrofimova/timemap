@@ -3,6 +3,11 @@
   &_header {
     margin-bottom: 40px;
   }
+
+  &_all {
+    width: 80%;
+    margin: auto;
+  }
 }
 
 
@@ -29,16 +34,35 @@
 
 }
 
+.timeoff_wrapper {
+  display: flex;
+  align-items: center;
+  margin: 20px 10px 20px 0;
+}
+
 .timeoff {
+  flex-basis: 100%;
   box-shadow: $box_shadow;
-  margin: 20px 0;
 
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 5px 20px;
 
   &_right {
     margin-left: auto;
+  }
+
+  &_cta {
+
+    &_manager {
+      width: 115px;
+    }
+    &_employee {
+      width: 55px;
+    }
+    & client {
+      width: 0;
+    }
   }
 
   &_item {
@@ -66,25 +90,24 @@
     }
   }
 
-  &_buttons {
-    display: inline-block;
-    border-left: 1px solid #e0e0e0;
-    padding-left: 20px;
-    margin-left: 10px;
-
-    button {
-      @include transition(.3);
-      background-color: white;
-      border-radius: 5px;
-      font-size: 16px;
-      padding: 5px 20px;
-
-      &:hover {
-        cursor: pointer;
-        color: white;
-      }
-    }
-  }
+  //&_buttons {
+  //  display: inline-block;
+  //  padding-left: 20px;
+  //  margin-left: 10px;
+  //
+  //  button {
+  //    @include transition(.3);
+  //    background-color: white;
+  //    border-radius: 5px;
+  //    font-size: 16px;
+  //    padding: 5px 20px;
+  //
+  //    &:hover {
+  //      cursor: pointer;
+  //      color: white;
+  //    }
+  //  }
+  //}
 
   &_cancel {
     border: 1px solid $blue_light;

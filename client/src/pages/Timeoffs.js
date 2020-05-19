@@ -12,10 +12,11 @@ class Timeoffs extends Component {
   }
 
   componentDidMount() {
+    let params = '?sort=desc';
     let id = this.props.match.params.id;
 
     setTimeout(() => {
-      axios.get(window.base_api_url + '/users/' + id + '/timeoffs',
+      axios.get(window.base_api_url + '/users/' + id + '/timeoffs' + params,
         {withCredentials: true})
         .then(response => {
           this.setState({timeoffs: response.data.timeoffs});

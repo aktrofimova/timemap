@@ -63,7 +63,9 @@ class TaskTracker extends Component {
 
         {this.state.isSameUser ? <NewTask className="tasks_new" currentUser={this.props.currentUser}/> : null }
         <p style={{borderBottom: '1px solid #ccc', paddingBottom: '15px'}}></p>
-        {blocks.map(block => block) || null}
+        <div className="tasks_all">
+          {blocks.map(block => block) || null}
+        </div>
       </div>
     );
   }

@@ -73,7 +73,7 @@ const NewTask = () => {
       hours: hours,
       started_at: startedAt,
       ended_at: endedAt,
-    }
+    };
 
     let params = '';
 
@@ -142,7 +142,6 @@ const NewTask = () => {
       <TextField id="hours" className="new_task_field new_task_hours" label="Hours" defaultValue="00:00" onChange={handleHoursChange}/>
 
       <Button style={{maxHeight: '48px', width: '10%'}} variant="outlined" type="submit">Add Task</Button>
-      {/*<Button style={{maxHeight: '48px', width: '10%'}} variant="outlined" >Add Task</Button>*/}
 
     </form>
 

@@ -32,8 +32,6 @@ class Api::TasksController < ApplicationController
     @task = Task.new(task_params)
 
     display_names = {'dev' => 'Development', 'qa' => 'Testing', 'ot' => 'Overtime Hours'}
-    Rails.logger.info("======= ======= =======: #{display_names[params['task']['name_identifier']]}")
-
     @task.display_name = display_names[params['task']['name_identifier']]
 
     if @task.save
@@ -57,7 +55,6 @@ class Api::TasksController < ApplicationController
 
   def task_params
     params.fetch(:task, {}).permit(:display_name, :details, :date, :hours, :started_at, :ended_at, :user_id, :name_identifier)
-    # params.require(:task).permit(:display_name, :details, :date, :hours, :started_at, :ended_at, :user_id, :name_identifier)
   end
 
 
