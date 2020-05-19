@@ -41,7 +41,6 @@ class Profile extends Component {
 
         <div className="profile_content">
           <div className="profile_left">
-            {/* image here*/}
             <div style={{display: 'inline-block', width: '100px', height: '100px', border: '1px solid #ebebeb', backgroundColor: '#ebebeb'}}></div>
 
             {this.state.isSameUser ? <Aux>

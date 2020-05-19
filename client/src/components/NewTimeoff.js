@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'date-fns';
 import axios from 'axios';
 import IconButton from '@material-ui/core/IconButton';
 import PlaylistAddOutlinedIcon from '@material-ui/icons/PlaylistAddOutlined';
-import { Button, MenuItem, TextField } from "@material-ui/core";
+import { MenuItem, TextField } from "@material-ui/core";
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
 
@@ -13,10 +13,6 @@ const NewTimeoff = (props) => {
     {name_identifier: 'p_ill', label: 'Paid Illness'},
     {name_identifier: 'up_ill', label: 'Unpaid Illness'}
   ]
-
-  // const timeoffs = [{name_identifier: 'vac', label: 'Vacation'},
-  //   {name_identifier: 'ill', label: 'Illness'}
-  // ]
 
   const [startDate, setStartDate] = React.useState(new Date()),
     [endDate, setEndDate] = React.useState(new Date()),
@@ -55,8 +51,6 @@ const NewTimeoff = (props) => {
         }
       })
       .catch(error => console.log('api errors:', error))
-
-
   };
 
   return (
@@ -107,7 +101,6 @@ const NewTimeoff = (props) => {
         <IconButton type="submit" title="Request Time Off">
           <PlaylistAddOutlinedIcon fontSize="large" className="primary_colour"/>
         </IconButton>
-
       </form>
     </div>
   );

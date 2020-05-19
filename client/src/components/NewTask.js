@@ -3,10 +3,9 @@ import 'date-fns';
 import axios from 'axios';
 import IconButton from '@material-ui/core/IconButton';
 import PlaylistAddOutlinedIcon from '@material-ui/icons/PlaylistAddOutlined';
-import { Button, MenuItem, TextField } from "@material-ui/core";
+import { MenuItem, TextField } from "@material-ui/core";
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
-
 
 const NewTask = (props) => {
   const tasks = [{value: 'dev', label: 'Development'},
@@ -87,8 +86,6 @@ const NewTask = (props) => {
         }
       })
       .catch(error => console.log('api errors:', error))
-
-
   };
 
   return (
@@ -143,9 +140,7 @@ const NewTask = (props) => {
       <IconButton type="submit" title="Add Task">
         <PlaylistAddOutlinedIcon fontSize="large" className="primary_colour"/>
       </IconButton>
-
     </form>
-
   );
 }
 

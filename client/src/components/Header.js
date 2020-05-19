@@ -1,16 +1,11 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState }  from 'react';
 import axios from 'axios';
-import { Link, Redirect, Route} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { makeStyles} from "@material-ui/core/styles";
 import Aux from '../hoc/Aux';
 import Logo from '../components/Logo';
-import TaskTracker from '../pages/TaskTracker';
-import Timeoffs from '../pages/Timeoffs';
-import Home from '../pages/Home';
 import { AppBar, Toolbar, IconButton, Menu, MenuItem }from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import logo from "../logo-coloured.svg";
-
 
 const useStyles = makeStyles(() => ({
   app_bar: {
@@ -36,11 +31,8 @@ const useStyles = makeStyles(() => ({
 const Header = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  // const [currentPath] = useState(window.location.pathname);
   const isMenuOpen = Boolean(anchorEl);
   const menuId = 'profile-menu';
-
-
 
   const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
@@ -61,8 +53,6 @@ const Header = (props) => {
       .catch(error => console.log(error))
   }
 
-  // const currentUser = props.currentUser;
-  // const project = currentUser.project.id;
   const menuItems = props.loggedInStatus ? [
       <MenuItem key="profile" onClick={handleProfileMenuClose}><Link to={"/profile/" + props.currentUser.id}>Profile</Link></MenuItem>,
       <MenuItem key="logout" onClick={handleLogout}><Link to="/">Log out</Link></MenuItem>
@@ -71,7 +61,6 @@ const Header = (props) => {
       <MenuItem key="login" onClick={handleProfileMenuClose}><Link to="/login">Log in</Link></MenuItem>,
       <MenuItem key="signup" onClick={handleProfileMenuClose}><Link to="/signup">Sign Up</Link></MenuItem>
     ]
-
 
   return (
     <AppBar position="fixed" className={classes.app_bar}>

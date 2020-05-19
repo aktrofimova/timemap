@@ -4,14 +4,6 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
 class TaskCard extends Component {
-  state = {
-    task: {
-    }
-  }
-
-  componentDidMount() {
-
-  }
 
   render() {
     var displayTimeRange = this.props.task.started_at && this.props.task.ended_at;

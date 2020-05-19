@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class TestUsers extends Component {
   state = {
     users: []

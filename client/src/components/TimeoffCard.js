@@ -13,15 +13,8 @@ const timeoff_types = {
 }
 
 class TimeoffCard extends Component {
-  state = {
 
-  }
-
-  componentDidMount() {
-
-  }
-
-  handleSubmit = (event) => {
+  handleApprove = (event) => {
 
   }
 
@@ -36,12 +29,12 @@ class TimeoffCard extends Component {
   }
 
   render() {
-    let isCurrentManager = this.props.currentUser.role == "manager";
-    let isCurrentEmployee = this.props.currentUser.role == "employee";
-    let isPending = this.props.timeoff.status == "pending";
-    let isConflict = this.props.timeoff.status == "conflict";
-    let showApproveBtns = isCurrentManager && (isPending || isConflict);
-    let showCancelBtn = isCurrentEmployee && (isPending || isConflict);
+    let isCurrentManager = this.props.currentUser.role == "manager",
+      isCurrentEmployee = this.props.currentUser.role == "employee",
+      isPending = this.props.timeoff.status == "pending",
+      isConflict = this.props.timeoff.status == "conflict";
+    let showApproveBtns = isCurrentManager && (isPending || isConflict),
+      showCancelBtn = isCurrentEmployee && (isPending || isConflict);
     let ctaClass = isCurrentManager ? "timeoff_cta_manager" : isCurrentEmployee ? "timeoff_cta_employee" : "timeoff_cta_client";
 
     return (
@@ -57,11 +50,11 @@ class TimeoffCard extends Component {
 
         <div className={"timeoff_cta " + ctaClass}>
           { showApproveBtns ? <Aux>
-              <IconButton title="Reject request" onClick={this.handleReject}>
+              <IconButton title="Reject Request" onClick={this.handleReject}>
                 {/*<CancelOutlinedIcon className="secondary_colour"/>*/}
                 <CancelOutlinedIcon/>
               </IconButton>
-              <IconButton title="Approve request" onClick={this.handleSubmit}>
+              <IconButton title="Approve Request" onClick={this.handleApprove}>
                 <CheckCircleOutlinedIcon className="primary_colour"/>
               </IconButton>
             </Aux> :

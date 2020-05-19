@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-
 class UserCard extends Component {
   state = {
     timeoffs: []
@@ -31,7 +30,6 @@ class UserCard extends Component {
           {this.props.allowIndicator && (hasPending || hasconflict) ? <div className="user_card_timeoff_indicator"></div> : null}
           <div className="user_card_role_indicator">{this.props.displayUser.role}</div>
           <div className="user_card_left" >
-            {/* image here*/}
             <div style={{display: 'inline-block', width: '100px', height: '100px', border: '1px solid #ebebeb', backgroundColor: '#ebebeb'}}></div>
           </div>
           <div className="user_card_right">
