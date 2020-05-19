@@ -39,7 +39,7 @@ class TimeoffCard extends Component {
     let isCurrentEmployee = this.props.currentUser.role == "employee";
     let isPending = this.props.timeoff.status == "pending";
     let showApproveBtns = isCurrentManager && isPending;
-    let showCancelBtns = isCurrentEmployee && isPending ;
+    let showCancelBtn = isCurrentEmployee && isPending ;
     let ctaClass = isCurrentManager ? "timeoff_cta_manager" : isCurrentEmployee ? "timeoff_cta_employee" : "timeoff_cta_client";
 
     return (
@@ -63,7 +63,7 @@ class TimeoffCard extends Component {
                 <CheckCircleOutlinedIcon className="primary_colour"/>
               </IconButton>
             </Aux> :
-            showCancelBtns && this.props.isSameUser ?
+            showCancelBtn && this.props.isSameUser ?
               <IconButton className="timeoff_delete" title="Cancel request" onClick={()=>{axios.delete(window.base_api_url + '/timeoffs/' + this.props.timeoff.id);}}>
                 <CancelOutlinedIcon fontSize="small"/>
               </IconButton> : null}

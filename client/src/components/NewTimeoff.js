@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import 'date-fns';
 import axios from 'axios';
+import IconButton from '@material-ui/core/IconButton';
+import PlaylistAddOutlinedIcon from '@material-ui/icons/PlaylistAddOutlined';
 import { Button, MenuItem, TextField } from "@material-ui/core";
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
@@ -102,7 +104,9 @@ const NewTimeoff = (props) => {
 
         </MuiPickersUtilsProvider>
 
-        <Button style={{maxHeight: '48px', width: '10%'}} variant="outlined" type="submit">Request</Button>
+        <IconButton type="submit" title="Request Time Off">
+          <PlaylistAddOutlinedIcon fontSize="large" className="primary_colour"/>
+        </IconButton>
 
       </form>
     </div>

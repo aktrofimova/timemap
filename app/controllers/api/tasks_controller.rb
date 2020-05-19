@@ -31,7 +31,11 @@ class Api::TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    display_names = {'dev' => 'Development', 'qa' => 'Testing', 'ot' => 'Overtime Hours'}
+    display_names = {'dev' => 'Development',
+                     'qa' => 'Testing',
+                     'meet' => 'Meeting',
+                     'plan' => 'Planning',
+                     'ot' => 'Overtime Hours'}
     @task.display_name = display_names[params['task']['name_identifier']]
 
     if @task.save

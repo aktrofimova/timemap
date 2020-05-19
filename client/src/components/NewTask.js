@@ -1,13 +1,18 @@
 import React from 'react';
 import 'date-fns';
 import axios from 'axios';
+import IconButton from '@material-ui/core/IconButton';
+import PlaylistAddOutlinedIcon from '@material-ui/icons/PlaylistAddOutlined';
 import { Button, MenuItem, TextField } from "@material-ui/core";
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
 
+
 const NewTask = (props) => {
   const tasks = [{value: 'dev', label: 'Development'},
     {value: 'qa', label: 'Testing'},
+    {value: 'meet', label: 'Meeting'},
+    {value: 'plan', label: 'Planning'},
     {value: 'ot', label: 'Overtime Hours'},
   ]
 
@@ -135,7 +140,9 @@ const NewTask = (props) => {
 
       <TextField id="hours" className="new_task_field new_task_hours" label="Hours" defaultValue={hours} onChange={handleHoursChange}/>
 
-      <Button style={{maxHeight: '48px', width: '10%'}} variant="outlined" type="submit">Add Task</Button>
+      <IconButton type="submit" title="Add Task">
+        <PlaylistAddOutlinedIcon fontSize="large" className="primary_colour"/>
+      </IconButton>
 
     </form>
 
