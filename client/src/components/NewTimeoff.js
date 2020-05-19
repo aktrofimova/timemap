@@ -5,7 +5,7 @@ import { Button, MenuItem, TextField } from "@material-ui/core";
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
 
-const NewTimeoff = () => {
+const NewTimeoff = (props) => {
   // const timeoffs = [{value: 'p_vac', label: 'Paid Vacation'},
   //   {value: 'up_vac', label: 'Unpaid Vacation'},
   //   {value: 'p_ill', label: 'Paid Illness'},
@@ -16,8 +16,7 @@ const NewTimeoff = () => {
     {name_identifier: 'ill', label: 'Illness'}
   ]
 
-  const [project, setProject] = React.useState('First Project'),
-    [startDate, setStartDate] = React.useState(new Date()),
+  const [startDate, setStartDate] = React.useState(new Date()),
     [endDate, setEndDate] = React.useState(new Date()),
     [name, setName] = React.useState('');
 
@@ -35,20 +34,15 @@ const NewTimeoff = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(event);
-
-    let userId = 1;
 
     let timeoff = {
       name_identifier: name,
-      user_id: userId,
+      user_id: props.currentUser.id,
       start_date: startDate,
       end_date: endDate
     };
 
-    let params = '';
-
-    axios.post(window.base_api_url + '/timeoffs' + params, {timeoff}, {withCredentials: true})
+    axios.post(window.base_api_url + '/timeoffs', {timeoff}, {withCredentials: true})
       .then(response => {
         if (response.data.status === 'created') {
           console.log('timeoff created');

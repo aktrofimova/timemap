@@ -5,15 +5,14 @@ import { Button, MenuItem, TextField } from "@material-ui/core";
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
 
-const NewTask = () => {
+const NewTask = (props) => {
   const tasks = [{value: 'dev', label: 'Development'},
     {value: 'qa', label: 'Testing'},
     {value: 'ot', label: 'Overtime Hours'},
   ]
 
-  const [project, setProject] = React.useState(''),
-    [name, setName] = React.useState(''),
-    [hours, setHours] = React.useState(''),
+  const [name, setName] = React.useState(''),
+    [hours, setHours] = React.useState('00:00'),
     [details, setDetails] = React.useState(''),
     [date, setDate] = React.useState(new Date()),
     [startedAt, setStartTime] = React.useState(new Date()),
@@ -60,14 +59,11 @@ const NewTask = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(event);
-
-    let userId = 1;
 
     let task = {
       display_name: "",
       name_identifier: name,
-      user_id: userId,
+      user_id: props.currentUser.id,
       details: details,
       date: date,
       hours: hours,
@@ -75,9 +71,7 @@ const NewTask = () => {
       ended_at: endedAt,
     };
 
-    let params = '';
-
-    axios.post(window.base_api_url + '/tasks' + params, {task}, {withCredentials: true})
+    axios.post(window.base_api_url + '/tasks', {task}, {withCredentials: true})
       .then(response => {
         if (response.data.status === 'created') {
           console.log('task created');
@@ -139,7 +133,7 @@ const NewTask = () => {
         />
       </MuiPickersUtilsProvider>
 
-      <TextField id="hours" className="new_task_field new_task_hours" label="Hours" defaultValue="00:00" onChange={handleHoursChange}/>
+      <TextField id="hours" className="new_task_field new_task_hours" label="Hours" defaultValue={hours} onChange={handleHoursChange}/>
 
       <Button style={{maxHeight: '48px', width: '10%'}} variant="outlined" type="submit">Add Task</Button>
 

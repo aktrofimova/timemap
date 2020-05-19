@@ -46,10 +46,10 @@ class Timeoffs extends Component {
       <div className="timeoffs page">
         <h1 className="header timeoffs_header">Time Offs: {this.state.user.name}</h1>
 
-        {this.state.isSameUser ? <NewTimeoff className="timeoffs_new"/> : null }
+        {this.state.isSameUser ? <NewTimeoff className="timeoffs_new" currentUser={this.props.currentUser}/> : null }
         <p style={{borderBottom: '1px solid #ccc', paddingBottom: '15px'}}></p>
         <div className="timeoffs_all">
-          {this.state.timeoffs.map((timeoff) => <TimeoffCard key={timeoff.id} currentUser={this.props.currentUser} timeoff={timeoff}/>)}
+          {this.state.timeoffs.map((timeoff) => <TimeoffCard key={timeoff.id} currentUser={this.props.currentUser} isSameUser={this.state.isSameUser} timeoff={timeoff}/>)}
         </div>
       </div>
     );

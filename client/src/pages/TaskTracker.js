@@ -33,8 +33,6 @@ class TaskTracker extends Component {
       if (this.props.currentUser.id == this.props.match.params.id)
         this.setState({isSameUser: true});
     }, 500);
-
-
   }
 
   getDateInWords = (rawDate) => {
@@ -43,16 +41,41 @@ class TaskTracker extends Component {
     return dateArr[2] + ' ' + dateArr[1] + ' ' + dateArr[3];
   }
 
+  calculateTotalTime = (timeRecords) => {
+    var hours = [];
+    var minutes = [];
+    timeRecords.map((record) => {
+      hours.push(record.split(":")[0]);
+      minutes.push(record.split(":")[1]);
+    });
+
+    hours = hours.map(h => Number(h));
+    minutes = minutes.map(m => Number(m));
+
+    var sumHours = hours.reduce((a, b) => a + b, 0);
+    var sumMinutes = minutes.reduce((a, b) => a + b, 0);
+
+    var hoursInMinutes = Math.floor(sumMinutes / 60);
+    sumHours += hoursInMinutes;
+    sumMinutes = sumMinutes % 60;
+
+    var totalTime = ("0" + sumHours).slice(-2) + ':' + ("0" + sumMinutes).slice(-2);
+    return totalTime;
+  }
+
   render() {
     let blocks = [];
     { for (let [key, value] of Object.entries(this.state.tasks)) {
+      var timeRecords = [];
+      value.map((val)=>{timeRecords.push(val.hours)});
+
       blocks.push(<div key={key} className="tasks_block">
         <div className="tasks_up">
           <p>{this.getDateInWords(key)}</p>
-          {/*<p><span style={{fontSize: '14px'}}>Total time:</span> <span>00:00</span></p>*/}
+          <p className={this.state.isSameUser ? "tasks_total_time_shift" : "tasks_total_time"}><span style={{fontSize: '14px'}}>Total time:</span> <span className="time_record primary_colour">{this.calculateTotalTime(timeRecords)}</span></p>
         </div>
         <div className="tasks_down">
-          {value.map((task) => <TaskCard key={task.id} task={task}/>)}
+          {value.map((task) => <TaskCard key={task.id} task={task} currentUser={this.props.currentUser} isSameUser={this.state.isSameUser}/>)}
         </div>
       </div>)
     }}

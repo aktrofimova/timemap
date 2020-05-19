@@ -20,6 +20,18 @@
     display: flex;
     flex-direction: column;
   }
+
+  &_total_time {
+
+  }
+
+  &_total_time_shift {
+    margin-right: 54px;
+  }
+
+  .time_record {
+    border-bottom: 1px solid;
+  }
 }
 
 
@@ -58,8 +70,8 @@
 }
 
 .task {
-  display: flex;
-  padding: 0 20px;
+ display: flex;
+  padding: 5px 20px;
   border-bottom: 1px solid #f2f2f2;
 
   &_right {
