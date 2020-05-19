@@ -23,11 +23,12 @@ class UserCard extends Component {
     let displayUser = this.props.displayUser,
       email = displayUser.email,
       timeoffs = this.state.timeoffs,
-      hasPending = timeoffs.find(timeoff => timeoff.status == 'pending');
+      hasPending = timeoffs.find(timeoff => timeoff.status == 'pending'),
+      hasconflict = timeoffs.find(timeoff => timeoff.status == 'conflict');
 
     return (
         <Link className="user_card" to={"/profile/" + displayUser.id} data-id={displayUser.id}>
-          {this.props.allowIndicator && hasPending ? <div className="user_card_timeoff_indicator"></div> : null}
+          {this.props.allowIndicator && (hasPending || hasconflict) ? <div className="user_card_timeoff_indicator"></div> : null}
           <div className="user_card_role_indicator">{this.props.displayUser.role}</div>
           <div className="user_card_left" >
             {/* image here*/}

@@ -3,12 +3,13 @@ import axios from 'axios';
 import Aux from '../hoc/Aux';
 import IconButton from '@material-ui/core/IconButton';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
-import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 
 const timeoff_types = {
-  vac: 'Vacation',
-  ill: 'Illness'
+  p_vac: 'Paid Vacation',
+  up_vac: 'Unpaid Vacation',
+  p_ill: 'Paid Illness',
+  up_ill: 'Unpaid Illness'
 }
 
 class TimeoffCard extends Component {
@@ -38,8 +39,9 @@ class TimeoffCard extends Component {
     let isCurrentManager = this.props.currentUser.role == "manager";
     let isCurrentEmployee = this.props.currentUser.role == "employee";
     let isPending = this.props.timeoff.status == "pending";
-    let showApproveBtns = isCurrentManager && isPending;
-    let showCancelBtn = isCurrentEmployee && isPending ;
+    let isConflict = this.props.timeoff.status == "conflict";
+    let showApproveBtns = isCurrentManager && (isPending || isConflict);
+    let showCancelBtn = isCurrentEmployee && (isPending || isConflict);
     let ctaClass = isCurrentManager ? "timeoff_cta_manager" : isCurrentEmployee ? "timeoff_cta_employee" : "timeoff_cta_client";
 
     return (

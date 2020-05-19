@@ -8,15 +8,15 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
 
 const NewTimeoff = (props) => {
-  // const timeoffs = [{value: 'p_vac', label: 'Paid Vacation'},
-  //   {value: 'up_vac', label: 'Unpaid Vacation'},
-  //   {value: 'p_ill', label: 'Paid Illness'},
-  //   {value: 'up_ill', label: 'Unpaid Illness'}
-  // ]
-
-  const timeoffs = [{name_identifier: 'vac', label: 'Vacation'},
-    {name_identifier: 'ill', label: 'Illness'}
+  const timeoffs = [{name_identifier: 'p_vac', label: 'Paid Vacation'},
+    {name_identifier: 'up_vac', label: 'Unpaid Vacation'},
+    {name_identifier: 'p_ill', label: 'Paid Illness'},
+    {name_identifier: 'up_ill', label: 'Unpaid Illness'}
   ]
+
+  // const timeoffs = [{name_identifier: 'vac', label: 'Vacation'},
+  //   {name_identifier: 'ill', label: 'Illness'}
+  // ]
 
   const [startDate, setStartDate] = React.useState(new Date()),
     [endDate, setEndDate] = React.useState(new Date()),
