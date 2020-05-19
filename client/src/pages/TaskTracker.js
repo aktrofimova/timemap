@@ -61,7 +61,7 @@ class TaskTracker extends Component {
       <div className="tasks page">
         <h1 className="header tasks_header">Task Tracker: {this.state.user.name}</h1>
 
-        {this.state.isSameUser ? <NewTask className="tasks_new"/> : null }
+        {this.state.isSameUser ? <NewTask className="tasks_new" currentUser={this.props.currentUser}/> : null }
         <p style={{borderBottom: '1px solid #ccc', paddingBottom: '15px'}}></p>
         {blocks.map(block => block) || null}
       </div>
