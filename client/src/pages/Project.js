@@ -15,9 +15,8 @@ class Project extends Component {
   }
   componentDidMount() {
     setTimeout(() => {
-      let base_url = 'http://localhost:3001';
       let id = this.props.match.params.id;
-      axios.get(base_url + '/api/projects/' + id,
+      axios.get(window.base_api_url + '/projects/' + id,
         {withCredentials: true}) // This allows our Rails server to set and read the cookie on the front-end’s browser. ALWAYS pass this argument!
         .then(response => {
           // console.log(response.data);

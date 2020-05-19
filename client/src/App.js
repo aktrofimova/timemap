@@ -14,12 +14,19 @@ import Header from "./components/Header";
 import './App.css';
 import './assets/stylesheets/main.scss'
 
+
+
 class App extends Component {
   state = {
     isLoggedIn: false,
     user: {},
     project: {}
   };
+
+  componentWillMount() {
+    window.base_url = 'http://localhost:3001'
+    window.base_api_url = 'http://localhost:3001/api'
+  }
 
   componentDidMount() {
     // setTimeout(() => {

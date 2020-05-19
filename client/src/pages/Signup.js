@@ -43,9 +43,7 @@ class Signup extends Component {
   componentDidMount() {
 
     setTimeout(() => {
-      let base_url = 'http://localhost:3001';
-
-      axios.get(base_url + '/api/projects/',
+      axios.get(window.base_api_url + '/projects/',
         {withCredentials: true})
         .then(response => {
           this.setState({projects: response.data.projects});
@@ -86,10 +84,9 @@ class Signup extends Component {
       has_extended_access: false
     }
 
-    let base_url = 'http://localhost:3001';
     let params = '?project_id=' + project_id
 
-    axios.post(base_url + '/api/users' + params, {user}, {withCredentials: true})
+    axios.post(window.base_api_url + '/users' + params, {user}, {withCredentials: true})
       .then(response => {
         if (response.data.status === 'created') {
           this.props.handleLogin(response);

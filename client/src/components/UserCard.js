@@ -10,9 +10,7 @@ class UserCard extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      let base_url = 'http://localhost:3001';
-
-      axios.get(base_url + '/api/users/' + this.props.displayUser.id + '/timeoffs',
+      axios.get(window.base_api_url + '/users/' + this.props.displayUser.id + '/timeoffs',
         {withCredentials: true})
         .then(response => {
           this.setState({timeoffs: response.data.timeoffs});

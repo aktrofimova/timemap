@@ -17,7 +17,7 @@ class Profile extends Component {
   componentDidMount() {
     setTimeout(() => {
       let id = this.props.match.params.id;
-      axios.get('http://localhost:3001/api/users/' + id,
+      axios.get(window.base_api_url + '/users/' + id,
         {withCredentials: true}) // This allows our Rails server to set and read the cookie on the front-end’s browser. ALWAYS pass this argument!
         .then(response => {
           this.setState({user: response.data.user});

@@ -12,18 +12,17 @@ class Timeoffs extends Component {
   }
 
   componentDidMount() {
-    let base_url = 'http://localhost:3001';
     let id = this.props.match.params.id;
 
     setTimeout(() => {
-      axios.get(base_url + '/api/users/' + id + '/timeoffs',
+      axios.get(window.base_api_url + '/users/' + id + '/timeoffs',
         {withCredentials: true})
         .then(response => {
           this.setState({timeoffs: response.data.timeoffs});
         })
         .catch(error => console.log('api errors:', error));
 
-      axios.get(base_url + '/api/users/' + id,
+      axios.get(window.base_api_url + '/users/' + id,
         {withCredentials: true})
         .then(response => {
           this.setState({user: response.data.user});
