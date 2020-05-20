@@ -48,9 +48,10 @@ class TimeoffCard extends Component {
     let isCurrentManager = this.props.currentUser.role == "manager",
       isCurrentEmployee = this.props.currentUser.role == "employee",
       isPending = this.props.timeoff.status == "pending",
+      isApproved = this.props.timeoff.status == "approved",
       isConflict = this.props.timeoff.status == "conflict";
     let showApproveBtns = isCurrentManager && (isPending || isConflict),
-      showCancelBtn = isCurrentEmployee && (isPending || isConflict);
+      showCancelBtn = isCurrentEmployee && (isPending || isConflict || isApproved);
     let ctaClass = isCurrentManager ? "timeoff_cta_manager" : isCurrentEmployee ? "timeoff_cta_employee" : "timeoff_cta_client";
 
     return (
