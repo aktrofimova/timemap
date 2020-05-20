@@ -41,7 +41,7 @@ class Api::TasksController < ApplicationController
     @task.started_at = params['task']['started_at'].to_time + 3.hours
     @task.ended_at = params['task']['ended_at'].to_time + 3.hours
 
-    hours = params['task']['ended_at'].to_time - params['task']['started_at'].to_time + 1.minute
+    hours = params['task']['ended_at'].to_time - params['task']['started_at'].to_time
     @task.hours = Time.at(hours.to_i.abs).utc.strftime("%H:%M")
 
     if @task.save

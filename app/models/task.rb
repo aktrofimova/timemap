@@ -6,7 +6,7 @@ class Task < ApplicationRecord
   end
 
   def calc_hours(start_at, end_at)
-    hours = end_at - start_at + 1.minute
+    hours = end_at - start_at
     Time.at(hours.to_i.abs).utc.strftime("%H:%M")
   end
 

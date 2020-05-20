@@ -66,10 +66,10 @@ Timeoff.create([{ user_id: 1, name_identifier: "p_vac", start_date: "2020-05-17"
 
 # create tasks for users
 Task.create([{ user_id: 1, display_name: "Development", name_identifier: "dev", details: "Developing some stuff", date: "2020-04-12", started_at: "09:00:00", ended_at: "17:00:00" },
-             { user_id: 1, display_name: "Development", name_identifier: "dev", details: "Developing", date: "2020-04-13", hours: "04:30" },
+             { user_id: 1, display_name: "Development", name_identifier: "dev", details: "Developing", date: "2020-04-13", started_at: "09:00:00", ended_at: "13:30:00" },
              { user_id: 1, display_name: "Overtime Hours", name_identifier: "ot", details: "Concierge rotation", date: "2020-04-13", started_at: "19:00:00", ended_at: "22:00:00" },
-             { user_id: 1, display_name: "Development", name_identifier: "dev", details: "Small task", date: "2020-04-13", hours: "00:30" },
-             { user_id: 1, display_name: "Development", name_identifier: "dev", details: "Small task", date: "2020-04-13", hours: "00:30" },
+             { user_id: 1, display_name: "Development", name_identifier: "dev", details: "Small task", date: "2020-04-13", started_at: "15:00:00", ended_at: "15:30:00" },
+             { user_id: 1, display_name: "Development", name_identifier: "dev", details: "Small task", date: "2020-04-13", started_at: "10:00:00", ended_at: "10:30:00" },
              { user_id: 2, display_name: "Development / Testing", name_identifier: "dev", details: "", date: "2020-04-15", started_at: "02:00PM", ended_at: "06:00PM" },
              { user_id: 2, display_name: "Development / Testing", name_identifier: "dev", details: "", date: "2020-04-15", started_at: "9:00AM", ended_at: "1:00PM" },
              { user_id: 12, display_name: "Development / Testing", name_identifier: "dev", details: "", date: "2020-04-15", started_at: "09:00:00", ended_at: "12:00:00" },
