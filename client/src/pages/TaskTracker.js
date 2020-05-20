@@ -42,18 +42,18 @@ class TaskTracker extends Component {
   }
 
   calculateTotalTime = (timeRecords) => {
-    var hours = [];
-    var minutes = [];
+    var h = [];
+    var m = [];
     timeRecords.map((record) => {
-      hours.push(record.split(":")[0]);
-      minutes.push(record.split(":")[1]);
+      h.push(record.split(":")[0]);
+      m.push(record.split(":")[1]);
     });
 
-    hours = hours.map(h => Number(h));
-    minutes = minutes.map(m => Number(m));
+    h = h.map(x => Number(x));
+    m = m.map(x => Number(x));
 
-    var sumHours = hours.reduce((a, b) => a + b, 0);
-    var sumMinutes = minutes.reduce((a, b) => a + b, 0);
+    var sumHours = h.reduce((a, b) => a + b, 0);
+    var sumMinutes = m.reduce((a, b) => a + b, 0);
 
     var hoursInMinutes = Math.floor(sumMinutes / 60);
     sumHours += hoursInMinutes;
@@ -71,7 +71,7 @@ class TaskTracker extends Component {
 
       blocks.push(<div key={key} className="tasks_block">
         <div className="tasks_up">
-          <p>{this.getDateInWords(key)}</p>
+          <p class_name="tasks_date">{this.getDateInWords(key)}</p>
           <p className={this.state.isSameUser ? "tasks_total_time_shift" : "tasks_total_time"}><span style={{fontSize: '14px'}}>Total time:</span> <span className="time_record primary_colour">{this.calculateTotalTime(timeRecords)}</span></p>
         </div>
         <div className="tasks_down">

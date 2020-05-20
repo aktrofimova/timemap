@@ -38,6 +38,12 @@ class Api::TasksController < ApplicationController
                      'ot' => 'Overtime Hours'}
     @task.display_name = display_names[params['task']['name_identifier']]
 
+    @task.started_at = params['task']['started_at'].to_time + 3.hours
+    @task.ended_at = params['task']['ended_at'].to_time + 3.hours
+
+    hours = params['task']['ended_at'].to_time - params['task']['started_at'].to_time + 1.minute
+    @task.hours = Time.at(hours.to_i.abs).utc.strftime("%H:%M")
+
     if @task.save
       render json: {task: @task, status: :created}
     else

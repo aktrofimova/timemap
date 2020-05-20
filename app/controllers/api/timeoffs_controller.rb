@@ -31,11 +31,19 @@ class Api::TimeoffsController < ApplicationController
   def create
     @timeoff = Timeoff.new(timeoff_params)
 
-    Rails.logger.info("======= ======= =======: #{params['timeoff']}")
     @timeoff.status = 'pending'
 
     if @timeoff.save
       render json: {timeoff: @timeoff, status: :created}
+    else
+      render json: @timeoff.errors, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH/PUT /tasks/1
+  def update
+    if @timeoff.update(timeoff_params)
+      render json: {timeoff: @timeoff}
     else
       render json: @timeoff.errors, status: :unprocessable_entity
     end

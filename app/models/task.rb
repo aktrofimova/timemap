@@ -6,8 +6,12 @@ class Task < ApplicationRecord
   end
 
   def calc_hours(start_at, end_at)
-    hours = end_at - start_at
+    hours = end_at - start_at + 1.minute
     Time.at(hours.to_i.abs).utc.strftime("%H:%M")
+  end
+
+  def get_formated_date(date)
+    Date.parse(date.to_s).strftime("%m/%d/%Y")
   end
 
   def base_hash
@@ -22,9 +26,5 @@ class Task < ApplicationRecord
       :started_at => format_time(started_at) || '',
       :ended_at => format_time(ended_at) || '',
     }
-  end
-
-  def get_formated_date(date)
-    Date.parse(date.to_s).strftime("%m/%d/%Y")
   end
 end

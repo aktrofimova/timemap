@@ -16,11 +16,62 @@ const NewTask = (props) => {
   ]
 
   const [name, setName] = React.useState(''),
-    [hours, setHours] = React.useState('00:00'),
     [details, setDetails] = React.useState(''),
     [date, setDate] = React.useState(new Date()),
     [startedAt, setStartTime] = React.useState(new Date()),
-    [endedAt, setEndTime] = React.useState(new Date());
+    [endedAt, setEndTime] = React.useState(new Date()),
+    [hours, setHours] = React.useState(msToTime(endedAt.getTime() - startedAt.getTime()));
+
+  const convertToMinutes = (timeRecord) => {
+    var h = timeRecord.split(":")[0];
+    var m = timeRecord.split(":")[1];
+    return (Number(m) + Number(h)*60);
+  };
+
+  function msToTime(duration) {
+    var m = Math.floor((duration / (1000 * 60)) % 60),
+      h = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    h = h < 10 ? '0'+h : h;
+    m = m < 10 ? '0'+m : m;
+
+    var res = h + ":" + m;
+    return res;
+  }
+
+  function formatAMPM(date) {
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12;
+    h = h ? h : 12; // the hour '0' should be '12'
+    h = h < 10 ? '0'+h : h;
+    m = m < 10 ? '0'+m : m;
+    var strTime = h + ':' + m + ampm;
+    return strTime;
+  };
+
+  const calculateTotalTime = (timeRecords) => {
+    var h = [];
+    var m = [];
+    timeRecords.map((record) => {
+      h.push(record.split(":")[0]);
+      m.push(record.split(":")[1]);
+    });
+
+    h = h.map(x => Number(x));
+    m = m.map(x => Number(x));
+
+    var sumHours = h.reduce((a, b) => a + b, 0);
+    var sumMinutes = m.reduce((a, b) => a + b, 0);
+
+    var hoursInMinutes = Math.floor(sumMinutes / 60);
+    sumHours += hoursInMinutes;
+    sumMinutes = sumMinutes % 60;
+
+    var totalTime = ("0" + sumHours).slice(-2) + ':' + ("0" + sumMinutes).slice(-2);
+    return totalTime;
+  }
 
   const handleDetailsChange = event => {
     setDetails(event.target.value);
@@ -32,14 +83,23 @@ const NewTask = (props) => {
 
   const handleHoursChange = event => {
     setHours(event.target.value);
+    var diff = convertToMinutes(event.target.value);
+    var newEndedAt = new Date(startedAt.getTime() + diff*60000);
+    setEndTime(newEndedAt);
   };
 
-  const handleStartTimeChange = startedAt => {
-    setStartTime(startedAt);
+  const handleStartTimeChange = newStartedAt => {
+    // console.log(formatAMPM(newStartedAt));
+    setStartTime(newStartedAt);
+    // var newHours = msToTime(endedAt.getTime() - newStartedAt.getTime());
+    // setHours(newHours);
   };
 
-  const handleEndTimeChange = endedAt => {
-    setEndTime(endedAt);
+  const handleEndTimeChange = newEndedAt => {
+    // console.log(formatAMPM(newEndedAt));
+    setEndTime(newEndedAt);
+    // var newHours = msToTime(newEndedAt.getTime() - startedAt.getTime());
+    // setHours(newHours);
   };
 
   const handleDateChange = date => {
@@ -72,7 +132,7 @@ const NewTask = (props) => {
       date: date,
       hours: hours,
       started_at: startedAt,
-      ended_at: endedAt,
+      ended_at: endedAt
     };
 
     axios.post(window.base_api_url + '/tasks', {task}, {withCredentials: true})

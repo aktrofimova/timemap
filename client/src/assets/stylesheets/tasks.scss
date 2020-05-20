@@ -12,21 +12,13 @@
   &_up {
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 30px;
     background-color: #f2f2f2
   }
 
   &_down {
     display: flex;
     flex-direction: column;
-  }
-
-  &_total_time {
-
-  }
-
-  &_total_time_shift {
-    margin-right: 54px;
   }
 
   .time_record {

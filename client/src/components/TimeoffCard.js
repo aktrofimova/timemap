@@ -15,11 +15,27 @@ const timeoff_types = {
 class TimeoffCard extends Component {
 
   handleApprove = (event) => {
-
+    axios.put(window.base_api_url + '/timeoffs/' + this.props.timeoff.id, {
+      status: "approved"
+    })
+      .then(response => {
+        console.log('timeoff updated');
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   handleReject = (event) => {
-
+    axios.put(window.base_api_url + '/timeoffs/' + this.props.timeoff.id, {
+      status: "conflict"
+    })
+      .then(response => {
+        console.log('timeoff updated');
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   getDateInWords = (rawDate) => {
